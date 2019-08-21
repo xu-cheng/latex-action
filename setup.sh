@@ -36,7 +36,7 @@ echo "==> Clean up"
 rm -rf \
   /opt/texlive/texdir/install-tl \
   /opt/texlive/texdir/install-tl.log \
-  /opt/texlive/texdir/texmf-dist/doc  \
+  /opt/texlive/texdir/texmf-dist/doc \
   /opt/texlive/texdir/texmf-dist/source \
   /opt/texlive/texdir/texmf-var/web2c/tlmgr.log \
   /root/setup.sh \
