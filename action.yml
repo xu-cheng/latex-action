@@ -20,3 +20,6 @@ runs:
     - ${{ inputs.compiler }}
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
+branding:
+  icon: book
+  color: blue
