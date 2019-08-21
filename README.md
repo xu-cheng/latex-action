@@ -1,6 +1,6 @@
 # latex-action
 
-GitHub Action to compile LaTeX documents.
+GitHub Actions to compile LaTeX documents.
 
 It runs in the docker with a minimal [TeXLive](https://www.tug.org/texlive/) environment installed. Further, it uses [`texliveonfly`](https://ctan.org/pkg/texliveonfly) to find and install the missing packages.
 
