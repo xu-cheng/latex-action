@@ -6,10 +6,25 @@ It runs in the docker with a minimal [TeXLive](https://www.tug.org/texlive/) env
 
 ## Inputs
 
-* `root_file`: The root LaTeX file to be compiled.
-* `compiler`: The LaTeX engine to used by `texliveonfly`. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used.
-* `args`: The extra arguments to be passed to `texliveonfly`. By default, it is `-pdf -file-line-error -interaction=nonstopmode`.
-* `extra_packages`: The extra packages to be installed by `tlmgr` separated by space. Sometimes, `texliveonfly` will fail to find the missing packages. In this case, you can pass them explicitly. For example, `extra_packages: "biblatex-trad biblatex-ieee"` will install packages `biblatex-trad` and `biblatex-ieee`.
+* `root_file`
+
+    The root LaTeX file to be compiled. This input is required.
+
+* `working_directory`
+
+    The working directory for `texliveonfly` to be invoked.
+
+* `compiler`
+
+    The LaTeX engine to used by `texliveonfly`. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used.
+
+* `args`
+
+    The extra arguments to be passed to `texliveonfly`. By default, it is `-pdf -file-line-error -interaction=nonstopmode`.
+
+* `extra_packages`
+
+    The extra packages to be installed by `tlmgr` separated by space. Sometimes, `texliveonfly` will fail to find the missing packages. In this case, you can pass them explicitly. For example, `extra_packages: "biblatex-trad biblatex-ieee"` will install packages `biblatex-trad` and `biblatex-ieee`.
 
 ## Example
 

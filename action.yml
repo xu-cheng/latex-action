@@ -3,8 +3,10 @@ description: GitHub Actions to compile LaTeX documents
 author: Cheng XU
 inputs:
   root_file:
-    description: Root LaTeX file
+    description: The root LaTeX file to be compiled
     required: true
+  working_directory:
+    description: The working directory for texliveonfly to be invoked
   compiler:
     description: LaTeX engine to be used by texliveonfly
     default: latexmk
@@ -18,6 +20,7 @@ runs:
   image: Dockerfile
   args:
     - ${{ inputs.root_file }}
+    - ${{ inputs.working_directory }}
     - ${{ inputs.compiler }}
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
