@@ -1,0 +1,22 @@
+name: Github Actions for LaTeX
+description: GitHub Action to compile LaTeX documents
+author: Cheng XU
+inputs:
+  root_file:
+    description: Root LaTeX file
+  compiler:
+    description: LaTeX engine to be used by texliveonfly
+    default: latexmk
+  args:
+    description: Extra arguments to be passed to texliveonfly
+    default: "-pdf -file-line-error -interaction=nonstopmode"
+  extra_packages:
+    description: Install extra packages by tlmgr
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.root_file }}
+    - ${{ inputs.compiler }}
+    - ${{ inputs.args }}
+    - ${{ inputs.extra_packages }}
