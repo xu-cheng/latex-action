@@ -4,6 +4,7 @@ author: Cheng XU
 inputs:
   root_file:
     description: Root LaTeX file
+    required: true
   compiler:
     description: LaTeX engine to be used by texliveonfly
     default: latexmk
