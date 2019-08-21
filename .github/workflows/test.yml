@@ -1,0 +1,16 @@
+name: Test Github Actions
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: Compile LaTeX document
+        uses: ./
+        with:
+          root_file: test.tex
+          working_directory: test/
+      - name: Check pdf file
+        run: |
+          file test/test.pdf | grep -q ' PDF '
