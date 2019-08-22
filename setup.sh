@@ -45,6 +45,7 @@ rm -rf \
   /opt/texlive/texdir/texmf-dist/doc \
   /opt/texlive/texdir/texmf-dist/source \
   /opt/texlive/texdir/texmf-var/web2c/tlmgr.log \
+  /root/.gnupg \
   /root/setup.sh \
   /root/texlive.profile \
   /root/texlive_pgp_keys.asc \
