@@ -4,13 +4,11 @@ set -e
 
 echo "==> Install TeXLive"
 mkdir -p /tmp/install-tl
-wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
-  -O /tmp/install-tl/install-tl-unx.tar.gz
-wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512 \
-  -O /tmp/install-tl/install-tl-unx.tar.gz.sha512
-wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc \
-  -O /tmp/install-tl/install-tl-unx.tar.gz.sha512.asc
 cd /tmp/install-tl
+MIRROR_URL="$(wget -q -S -O /dev/null http://mirror.ctan.org/ 2>&1 | sed -ne 's/.*Location: \(\w*\)/\1/p')"
+wget -nv "${MIRROR_URL}systems/texlive/tlnet/install-tl-unx.tar.gz"
+wget -nv "${MIRROR_URL}systems/texlive/tlnet/install-tl-unx.tar.gz.sha512"
+wget -nv "${MIRROR_URL}systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc"
 gpg --import /root/texlive_pgp_keys.asc
 gpg --verify ./install-tl-unx.tar.gz.sha512.asc
 sha512sum -c ./install-tl-unx.tar.gz.sha512
