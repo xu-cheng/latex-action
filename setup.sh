@@ -6,6 +6,14 @@ echo "==> Install TeXLive"
 mkdir -p /tmp/install-tl
 wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
   -O /tmp/install-tl/install-tl-unx.tar.gz
+wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512 \
+  -O /tmp/install-tl/install-tl-unx.tar.gz.sha512
+wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc \
+  -O /tmp/install-tl/install-tl-unx.tar.gz.sha512.asc
+cd /tmp/install-tl
+gpg --import /root/texlive_pgp_keys.asc
+gpg --verify ./install-tl-unx.tar.gz.sha512.asc
+sha512sum -c ./install-tl-unx.tar.gz.sha512
 mkdir -p /tmp/install-tl/installer
 tar --strip-components 1 -zxf /tmp/install-tl/install-tl-unx.tar.gz \
   -C /tmp/install-tl/installer
@@ -41,5 +49,6 @@ rm -rf \
   /opt/texlive/texdir/texmf-var/web2c/tlmgr.log \
   /root/setup.sh \
   /root/texlive.profile \
+  /root/texlive_pgp_keys.asc \
   /tmp/install-biber \
   /tmp/install-tl
