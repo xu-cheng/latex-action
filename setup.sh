@@ -4,11 +4,11 @@ set -e
 
 echo "==> Install TeXLive"
 mkdir -p /tmp/install-tl
-wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
   -O /tmp/install-tl/install-tl-unx.tar.gz
-wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512 \
+wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512 \
   -O /tmp/install-tl/install-tl-unx.tar.gz.sha512
-wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc \
+wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz.sha512.asc \
   -O /tmp/install-tl/install-tl-unx.tar.gz.sha512.asc
 cd /tmp/install-tl
 gpg --import /root/texlive_pgp_keys.asc
@@ -28,11 +28,11 @@ tlmgr install \
 # install biber/biblatex from source
 # issue: https://github.com/plk/biber/issues/255
 mkdir -p /tmp/install-biber
-wget -q https://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/development/binaries/Linux-musl/biber-linux_x86_64-musl.tar.gz \
+wget -nv https://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/development/binaries/Linux-musl/biber-linux_x86_64-musl.tar.gz \
   -O /tmp/install-biber/biber-linux_x86_64-musl.tar.gz
 tar -zxf /tmp/install-biber/biber-linux_x86_64-musl.tar.gz -C /tmp/install-biber
 mv /tmp/install-biber/biber-linux_x86_64-musl /opt/texlive/texdir/bin/x86_64-linuxmusl/biber
-wget -q https://downloads.sourceforge.net/project/biblatex/development/biblatex-3.13.tgz \
+wget -nv https://downloads.sourceforge.net/project/biblatex/development/biblatex-3.13.tgz \
   -O /tmp/install-biber/biblatex-3.13.tgz
 tar -zxf /tmp/install-biber/biblatex-3.13.tgz -C /tmp/install-biber
 mv /tmp/install-biber/biblatex/latex /opt/texlive/texmf-local/tex/latex/biblatex
