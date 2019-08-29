@@ -36,5 +36,4 @@ rm -rf \
   /root/setup.sh \
   /root/texlive.profile \
   /root/texlive_pgp_keys.asc \
-  /tmp/install-biber \
   /tmp/install-tl
