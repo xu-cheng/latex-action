@@ -15,6 +15,8 @@ inputs:
     default: "-pdf -file-line-error -interaction=nonstopmode"
   extra_packages:
     description: Install extra packages by tlmgr
+  extra_system_packages:
+    description: Install extra packages by apk
 runs:
   using: docker
   image: Dockerfile
@@ -24,6 +26,7 @@ runs:
     - ${{ inputs.compiler }}
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
+    - ${{ inputs.extra_system_packages }}
 branding:
   icon: book
   color: blue

@@ -24,7 +24,11 @@ It runs in the docker with a minimal [TeXLive](https://www.tug.org/texlive/) env
 
 * `extra_packages`
 
-    The extra packages to be installed by `tlmgr` separated by space. Sometimes, `texliveonfly` will fail to find the missing packages. In this case, you can pass them explicitly. For example, `extra_packages: "biblatex-trad biblatex-ieee"` will install packages `biblatex-trad` and `biblatex-ieee`.
+    The extra packages to be installed by [`tlmgr`](https://www.tug.org/texlive/tlmgr.html) separated by space. Sometimes, `texliveonfly` will fail to find the missing packages. In this case, you can pass them explicitly. For example, `extra_packages: "biblatex-trad biblatex-ieee"` will install packages `biblatex-trad` and `biblatex-ieee`.
+
+* `extra_system_packages`
+
+    The extra packages to be installed by [`apk`](https://pkgs.alpinelinux.org/packages) separated by space. For example, `extra_system_packages: "py-pygments"` will install the package `py-pygments` to be used by the `minted` for code highlights.
 
 ## Example
 

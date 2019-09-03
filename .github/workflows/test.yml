@@ -20,8 +20,16 @@ jobs:
           root_file: biblatex.tex
           working_directory: test/
           extra_packages: biblatex-ieee
+      - name: Compile LaTeX document with minted
+        uses: ./
+        with:
+          root_file: minted.tex
+          working_directory: test/
+          extra_system_packages: py-pygments
+          args: "-pdf -shell-escape -file-line-error -interaction=nonstopmode"
       - name: Check pdf file
         run: |
           set -e
           file test/test.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
+          file test/minted.pdf | grep -q ' PDF '
