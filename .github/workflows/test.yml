@@ -27,7 +27,7 @@ jobs:
           working_directory: test/
           extra_system_packages: py-pygments
           args: "-pdf -shell-escape -file-line-error -interaction=nonstopmode"
-      - name: Check pdf file
+      - name: Check pdf files
         run: |
           set -e
           file test/test.pdf | grep -q ' PDF '
