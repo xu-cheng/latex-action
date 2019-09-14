@@ -18,15 +18,15 @@ It runs in the docker with a minimal [TeXLive](https://www.tug.org/texlive/) env
 
 * `compiler`
 
-    The LaTeX engine to used by `texliveonfly`. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used.
+    The LaTeX engine to used by `texliveonfly`. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used, which automates the process of generating LaTeX documents by issuing the appropriate sequence of commands to be run.
 
 * `args`
 
-    The extra arguments to be passed to `texliveonfly`. By default, it is `-pdf -file-line-error -interaction=nonstopmode`.
+    The extra arguments to be passed to `texliveonfly`. By default, it is `-pdf -file-line-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. If you want to use `xelatex` or `lualatex`, you can set the `args` to `-xelatex -file-line-error -interaction=nonstopmode` or `-lualatex --file-line-error --interaction=nonstopmode` respectively. Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 * `extra_packages`
 
-    The extra packages to be installed by [`tlmgr`](https://www.tug.org/texlive/tlmgr.html) separated by space. Sometimes, `texliveonfly` will fail to find the missing packages. In this case, you can pass them explicitly. For example, `extra_packages: "biblatex-trad biblatex-ieee"` will install packages `biblatex-trad` and `biblatex-ieee`.
+    The extra packages to be installed by [`tlmgr`](https://www.tug.org/texlive/tlmgr.html) separated by space.  If this Github action fails to build the document, it is likely due to `texliveonfly` failing to install the missing packages. In this case, you can pass them explicitly. For example, `extra_packages: "cm-super biblatex-ieee"` will install packages `cm-super` and `biblatex-ieee`.
 
 * `extra_system_packages`
 
