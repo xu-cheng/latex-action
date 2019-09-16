@@ -14,6 +14,11 @@ jobs:
         with:
           root_file: test.tex
           working_directory: test/
+      - name: Compile LaTeX document with math symbols
+        uses: ./
+        with:
+          root_file: math.tex
+          working_directory: test/
       - name: Compile LaTeX document with biblatex/biber
         uses: ./
         with:
@@ -31,5 +36,6 @@ jobs:
         run: |
           set -e
           file test/test.pdf | grep -q ' PDF '
+          file test/math.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
           file test/minted.pdf | grep -q ' PDF '
