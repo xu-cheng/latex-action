@@ -20,6 +20,7 @@ tar --strip-components 1 -zxf /tmp/install-tl/install-tl-unx.tar.gz \
 echo "==> Install Packages"
 tlmgr update --self
 tlmgr install \
+  collection-fontsrecommended \
   biber \
   biblatex \
   latexmk \
