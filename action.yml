@@ -1,5 +1,5 @@
-name: Github Actions for LaTeX
-description: GitHub Actions to compile LaTeX documents
+name: Github Action for LaTeX
+description: GitHub Action to compile LaTeX documents
 author: Cheng XU
 inputs:
   root_file:
