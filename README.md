@@ -61,7 +61,7 @@ To enable `--shell-escape`, you should add it to `args`. For example, set `args`
 
 ### It fails to build the document, how to solve it?
 
-If this Github action fails to build the document, it is likely due to `texliveonfly` failing to install the missing packages. In this case, you can pass them explicitly in `extra_packages`. Try to find the missing packages or the missing fonts in the build log. You could also use `tlmgr search <keyword>` in your local environment to find the package. [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
+If this Github action fails to build the document, it is likely due to `texliveonfly` failing to install the missing packages. In this case, you can pass them explicitly in `extra_packages`. Try to find the missing packages or the missing fonts in the build log. Alternatively, you could use the [`list_tl_pkgs.rb`](https://github.com/xu-cheng/latex-action/blob/master/tools/list_tl_pkgs.rb) script to list all the packages used by your LaTeX document. [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
 
 ### Is it possible to change the TeXLive scheme?
 
