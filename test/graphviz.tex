@@ -1,12 +1,5 @@
 \documentclass{article}
-
 \usepackage[pdf]{graphviz}
-
 \begin{document}
-\digraph[scale=0.5]{xabcd}{rankdir=TB;
-    x -> a [label="a.com"]
-    x -> b [label="b.com"]
-    x -> c [label="c.com"]
-    x -> d [label="d.com"]
-}
+\digraph[scale=0.5]{abc}{rankdir=LR; a->b->c;}
 \end{document}
