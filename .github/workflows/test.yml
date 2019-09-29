@@ -33,6 +33,14 @@ jobs:
           working_directory: test/
           extra_system_packages: py-pygments
           args: "-pdf -shell-escape -file-line-error -interaction=nonstopmode"
+      - name: Compile LaTeX document with graphviz
+        uses: ./
+        with:
+          root_file: graphviz.tex
+          working_directory: test/
+          extra_packages: graphviz
+          extra_system_packages: graphviz
+          args: "-xelatex -shell-escape -file-line-error -interaction=nonstopmode"
       - name: Check pdf files
         run: |
           set -e
@@ -40,3 +48,9 @@ jobs:
           file test/math.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
           file test/minted.pdf | grep -q ' PDF '
+          file test/graphviz.pdf | grep -q ' PDF '
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: test
+          path: test
