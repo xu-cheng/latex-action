@@ -39,7 +39,9 @@ jobs:
           root_file: graphviz.tex
           working_directory: test/
           extra_packages: arara
-          extra_system_packages: "graphviz openjdk11-jre"
+          # openjdk11 is used by arara
+          # ttf-freefont is used by graphviz.
+          extra_system_packages: "graphviz openjdk11-jre ttf-freefont"
           compiler: arara
           args: "--verbose"
       - name: Check pdf files
