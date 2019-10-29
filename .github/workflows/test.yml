@@ -1,9 +1,5 @@
 name: Test Github Action
-on:
-  push:
-  pull_request:
-  schedule:
-    - cron: '0 0 1 * *'
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -51,7 +47,6 @@ jobs:
           args: "--verbose"
       - name: Check pdf files
         run: |
-          set -e
           file test/test.pdf | grep -q ' PDF '
           file test/math.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
