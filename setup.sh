@@ -21,6 +21,7 @@ echo "==> Install Packages"
 tlmgr update --self
 tlmgr install \
   collection-fontsrecommended \
+  collection-fontutils \
   biber \
   biblatex \
   latexmk \
