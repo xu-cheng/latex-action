@@ -26,6 +26,11 @@ jobs:
           root_file: biblatex.tex
           working_directory: test/
           extra_packages: biblatex-ieee
+      - name: Compile LaTeX document with eps figure
+        uses: ./
+        with:
+          root_file: eps.tex
+          working_directory: test/
       - name: Compile LaTeX document with minted
         uses: ./
         with:
@@ -40,7 +45,7 @@ jobs:
           working_directory: test/
           extra_packages: arara
           # openjdk11 is used by arara
-          # ttf-freefont is used by graphviz.
+          # ttf-freefont is used by graphviz
           extra_system_packages: "graphviz openjdk11-jre ttf-freefont"
           compiler: arara
           args: "--verbose"
@@ -50,6 +55,7 @@ jobs:
           file test/test.pdf | grep -q ' PDF '
           file test/math.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
+          file test/eps.pdf | grep -q ' PDF '
           file test/minted.pdf | grep -q ' PDF '
           file test/graphviz.pdf | grep -q ' PDF '
           file test/abc.pdf | grep -q ' PDF '
