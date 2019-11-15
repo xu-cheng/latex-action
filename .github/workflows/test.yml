@@ -32,7 +32,6 @@ jobs:
         with:
           root_file: minted.tex
           working_directory: test/
-          extra_system_packages: py-pygments
           args: "-pdf -shell-escape -file-line-error -interaction=nonstopmode"
       - name: Compile LaTeX document with arara and graphviz
         uses: ./
@@ -40,9 +39,6 @@ jobs:
           root_file: graphviz.tex
           working_directory: test/
           extra_packages: arara
-          # openjdk11 is used by arara
-          # ttf-freefont is used by graphviz
-          extra_system_packages: "graphviz openjdk11-jre ttf-freefont"
           compiler: arara
           args: "--verbose"
       - name: Check pdf files
