@@ -55,9 +55,19 @@ By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, y
 
 To enable `--shell-escape`, you should add it to `args`. For example, set `args` to `-pdf -file-line-error -interaction=nonstopmode -shell-escape` when using pdfLaTeX.
 
+### Where is the PDF file? How to upload it?
+
+The PDF file will be in the same folder as that of the LaTeX source in the CI environment. It is up to you on whether to upload it to some places. Here are some example.
+* You can use [`@actions/upload-artifact`](https://github.com/actions/upload-artifact) to upload PDF file to the workflow tab.
+* You can use [`@actions/upload-release-asset`](https://github.com/actions/upload-release-asset) to upload PDF file to the Github Release.
+* You can use normal shell tools such as `scp`/`git`/`rsync` to upload PDF file anywhere. For example, you can git push to the `gh-pages` branch in your repo, so you can view the document using Github Pages.
+
 ### It fails to build the document, how to solve it?
 
-[Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
+* Try to solve the problem by examining the build log.
+* Try to build the document locally.
+* You can also try to narrow the problem by creating a minimal working example to reproduce the problem.
+* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
 
 ## License
 
