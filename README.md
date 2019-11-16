@@ -4,7 +4,7 @@
 
 GitHub Action to compile LaTeX documents.
 
-It runs in the docker with a minimal [TeXLive](https://www.tug.org/texlive/) environment installed. Further, it uses [`texliveonfly`](https://ctan.org/pkg/texliveonfly) to find and install the missing packages.
+It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a minimal [TeXLive](https://www.tug.org/texlive/) environment installed. Further, it uses [`texliveonfly`](https://ctan.org/pkg/texliveonfly) to find and install the missing packages.
 
 ## Inputs
 
