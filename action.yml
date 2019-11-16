@@ -6,15 +6,15 @@ inputs:
     description: The root LaTeX file to be compiled
     required: true
   working_directory:
-    description: The working directory for texliveonfly to be invoked
+    description: The working directory for the LaTeX engine
   compiler:
-    description: LaTeX engine to be used by texliveonfly
+    description: The LaTeX engine to be invoked
     default: latexmk
   args:
-    description: Extra arguments to be passed to texliveonfly
+    description: Extra arguments to be passed to the LaTeX engine
     default: "-pdf -file-line-error -interaction=nonstopmode"
   extra_packages:
-    description: Install extra packages by tlmgr
+    description: "[Deprecated] Install extra packages by tlmgr"
   extra_system_packages:
     description: Install extra packages by apk
 runs:

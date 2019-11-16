@@ -1,4 +1,4 @@
-FROM xucheng/texlive-small:latest
+FROM xucheng/texlive-full:latest
 
 COPY \
   LICENSE \

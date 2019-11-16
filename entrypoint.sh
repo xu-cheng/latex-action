@@ -17,15 +17,12 @@ if [ -n "$extra_system_packages" ]; then
 fi
 
 if [ -n "$extra_packages" ]; then
-  tlmgr update --self
-  for pkg in $extra_packages; do
-    echo "Install $pkg by tlmgr"
-    tlmgr install "$pkg"
-  done
+  echo "::warning ::Input 'extra_packages' is deprecated. We now build LaTeX document with full TeXLive installed."
 fi
 
 if [ -n "$working_directory" ]; then
   cd "$working_directory"
 fi
 
-texliveonfly -c "$compiler" -a "$args" "$root_file"
+# shellcheck disable=SC2086
+"$compiler" $args "$root_file"
