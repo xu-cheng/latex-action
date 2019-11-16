@@ -4,7 +4,7 @@
 
 GitHub Action to compile LaTeX documents.
 
-It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a minimal [TeXLive](https://www.tug.org/texlive/) environment installed. Further, it uses [`texliveonfly`](https://ctan.org/pkg/texliveonfly) to find and install the missing packages.
+It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a full [TeXLive](https://www.tug.org/texlive/) environment installed.
 
 ## Inputs
 
@@ -14,19 +14,15 @@ It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a min
 
 * `working_directory`
 
-    The working directory for `texliveonfly` to be invoked.
+    The working directory for the LaTeX engine.
 
 * `compiler`
 
-    The LaTeX engine to used by `texliveonfly`. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used, which automates the process of generating LaTeX documents by issuing the appropriate sequence of commands to be run.
+    The LaTeX engine to be invoked. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used, which automates the process of generating LaTeX documents by issuing the appropriate sequence of commands to be run.
 
 * `args`
 
-    The extra arguments to be passed to the compiler by `texliveonfly`. By default, it is `-pdf -file-line-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
-
-* `extra_packages`
-
-    The extra packages to be installed by [`tlmgr`](https://www.tug.org/texlive/tlmgr.html) separated by space. For example, `extra_packages: "cm-super biblatex-ieee"` will install packages `cm-super` and `biblatex-ieee` explicitly.
+    The extra arguments to be passed to the LaTeX engine. By default, it is `-pdf -file-line-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 * `extra_system_packages`
 
@@ -61,11 +57,7 @@ To enable `--shell-escape`, you should add it to `args`. For example, set `args`
 
 ### It fails to build the document, how to solve it?
 
-If this Github action fails to build the document, it is likely due to `texliveonfly` failing to install the missing packages. In this case, you can pass them explicitly in `extra_packages`. Try to find the missing packages or the missing fonts in the build log. Alternatively, you could use the [`list_tl_pkgs.rb`](https://github.com/xu-cheng/latex-action/blob/master/tools/list_tl_pkgs.rb) script to list all the packages used by your LaTeX document. [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
-
-### Is it possible to change the TeXLive scheme?
-
-The setup script installs TeXLive in small scheme to reduce the size. If you want to change it, you can specify it using `extra_packages`. For example, `extra_packages: scheme-medium` will install medium scheme, while `extra_packages: scheme-full` will install everything.
+[Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
 
 ## License
 
