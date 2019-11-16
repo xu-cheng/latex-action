@@ -21,7 +21,6 @@ jobs:
         with:
           root_file: biblatex.tex
           working_directory: test/
-          extra_packages: biblatex-ieee
       - name: Compile LaTeX document with eps figure
         uses: ./
         with:
@@ -38,7 +37,6 @@ jobs:
         with:
           root_file: graphviz.tex
           working_directory: test/
-          extra_packages: arara
           compiler: arara
           args: "--verbose"
       - name: Check pdf files
