@@ -52,8 +52,6 @@ jobs:
           # Extra arguments to be passed to the LaTeX engine
           args: # optional, default is -pdf -file-line-error -interaction=nonstopmode
           # [Deprecated] Install extra packages by tlmgr
-          extra_packages: # optional
-          # Install extra packages by apk
           extra_system_packages: # optional
           # Use local packages
           extra_local_packages: # optional

@@ -13,8 +13,6 @@ inputs:
   args:
     description: Extra arguments to be passed to the LaTeX engine
     default: "-pdf -file-line-error -interaction=nonstopmode"
-  extra_packages:
-    description: "[Deprecated] Install extra packages by tlmgr"
   extra_system_packages:
     description: Install extra packages by apk
   extra_local_packages:

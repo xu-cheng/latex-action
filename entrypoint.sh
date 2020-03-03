@@ -15,9 +15,8 @@ root_file="$1"
 working_directory="$2"
 compiler="$3"
 args="$4"
-extra_packages="$5"
-extra_system_packages="$6"
-extra_local_packages="$7"
+extra_system_packages="$5"
+extra_local_packages="$6"
 
 if [ -z "$root_file" ]; then
   error "Input 'root_file' is missing."
@@ -36,9 +35,11 @@ if [ -n "$extra_system_packages" ]; then
   done
 fi
 
-if [ -n "$extra_packages" ]; then
-  warn "Input 'extra_packages' is deprecated. We now build LaTeX document with full TeXLive installed."
+TEXINPUTS=".:"
+if [ -n "$extra_local_packages" ]; then
+  TEXINPUTS=".:${extra_local_packages}:"
 fi
+echo "Using TEXINPUTS=${TEXINPUTS}"
 
 if [ -n "$working_directory" ]; then
   cd "$working_directory"
@@ -49,4 +50,4 @@ if [ ! -f "$root_file" ]; then
 fi
 
 # shellcheck disable=SC2086
-TEXINPUTS=".:${extra_local_packages}:" "$compiler" $args "$root_file"
+"$compiler" $args "$root_file"
