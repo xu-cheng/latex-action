@@ -35,11 +35,10 @@ if [ -n "$extra_system_packages" ]; then
   done
 fi
 
-TEXINPUTS=".:"
 if [ -n "$extra_local_packages" ]; then
-  TEXINPUTS=".:${extra_local_packages}:"
+  export TEXINPUTS=".:${extra_local_packages}:${TEXINPUTS}"
+  echo "Using TEXINPUTS=${TEXINPUTS}"
 fi
-echo "Using TEXINPUTS=${TEXINPUTS}"
 
 if [ -n "$working_directory" ]; then
   cd "$working_directory"
