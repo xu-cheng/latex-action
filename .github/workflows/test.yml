@@ -39,6 +39,13 @@ jobs:
           working_directory: test/
           compiler: arara
           args: "--verbose"
+      - name: Compile LaTeX document with local dependency
+        uses: ./
+        with:
+          root_file: math_deps.tex
+          working_directory: test/
+          extra_local_packages: ./local_deps
+
       # https://github.com/xu-cheng/latex-action/issues/16
       - name: Test Action with Github Default Template
         uses: ./
