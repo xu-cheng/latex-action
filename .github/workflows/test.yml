@@ -55,6 +55,8 @@ jobs:
           extra_packages: # optional
           # Install extra packages by apk
           extra_system_packages: # optional
+          # Use local packages
+          extra_local_packages: # optional
       - name: Check pdf files
         run: |
           file test/test.pdf | grep -q ' PDF '

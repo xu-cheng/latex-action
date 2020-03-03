@@ -28,6 +28,10 @@ It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a ful
 
     The extra packages to be installed by [`apk`](https://pkgs.alpinelinux.org/packages) separated by space. For example, `extra_system_packages: "py-pygments"` will install the package `py-pygments` to be used by the `minted` for code highlights.
 
+* `extra_local_packages`
+
+    The extra packages to be used via the `TEXINPUTS` [environment](https://linux.die.net/man/1/pdflatex) variable.
+
 ## Example
 
 ```yaml

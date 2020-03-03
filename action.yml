@@ -1,6 +1,6 @@
-name: Github Action for LaTeX
+name: LaTeX Render Action for Github
 description: GitHub Action to compile LaTeX documents
-author: Cheng XU
+author: Cheng XU, Austin Basye
 inputs:
   root_file:
     description: The root LaTeX file to be compiled
@@ -17,6 +17,8 @@ inputs:
     description: "[Deprecated] Install extra packages by tlmgr"
   extra_system_packages:
     description: Install extra packages by apk
+  extra_local_packages:
+    description: Utilize extra local packages given a local directory
 runs:
   using: docker
   image: Dockerfile
@@ -25,8 +27,8 @@ runs:
     - ${{ inputs.working_directory }}
     - ${{ inputs.compiler }}
     - ${{ inputs.args }}
-    - ${{ inputs.extra_packages }}
     - ${{ inputs.extra_system_packages }}
+    - ${{ inputs.extra_local_packages }}
 branding:
   icon: book
   color: blue

@@ -17,6 +17,7 @@ compiler="$3"
 args="$4"
 extra_packages="$5"
 extra_system_packages="$6"
+extra_local_packages="$7"
 
 if [ -z "$root_file" ]; then
   error "Input 'root_file' is missing."
@@ -48,4 +49,4 @@ if [ ! -f "$root_file" ]; then
 fi
 
 # shellcheck disable=SC2086
-"$compiler" $args "$root_file"
+TEXINPUTS=".:${extra_local_packages}:" "$compiler" $args "$root_file"
