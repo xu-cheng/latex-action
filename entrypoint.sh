@@ -36,7 +36,7 @@ if [ -n "$extra_system_packages" ]; then
 fi
 
 if [ -n "$extra_local_packages" ]; then
-  export TEXINPUTS=".:${extra_local_packages}:${TEXINPUTS}"
+  export TEXINPUTS=".:${PWD}/${extra_local_packages}/:${TEXINPUTS}"
   echo "Using TEXINPUTS=${TEXINPUTS}"
 fi
 

@@ -44,7 +44,7 @@ jobs:
         with:
           root_file: math_deps.tex
           working_directory: test/
-          extra_local_packages: ./local_deps
+          extra_local_packages: test/local_deps
 
       # https://github.com/xu-cheng/latex-action/issues/16
       - name: Test Action with Github Default Template
