@@ -4,7 +4,8 @@ author: Cheng XU
 inputs:
   root_file:
     description: The root LaTeX file to be compiled
-    required: true
+  changed_file_log:
+    description: JSON file with all modified files
   working_directory:
     description: The working directory for the LaTeX engine
   compiler:
@@ -27,6 +28,7 @@ runs:
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
     - ${{ inputs.extra_system_packages }}
+    - ${{ changed_files }}
 branding:
   icon: book
   color: blue
