@@ -18,7 +18,7 @@ args="$4"
 extra_packages="$5"
 extra_system_packages="$6"
 pre_compile="$7"
-post_compile="$7"
+post_compile="$8"
 
 if [ -z "$root_file" ]; then
   error "Input 'root_file' is missing."
