@@ -19,7 +19,7 @@ jobs:
           pre_compile: |
             rm test.pdf
           post_compile: |
-            file test.pdf | grep -q ' PDF '
+            ls test.pdf
       - name: Compile LaTeX document with math symbols
         uses: ./
         with:
