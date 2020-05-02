@@ -2,6 +2,10 @@
 
 set -e
 
+info() {
+  echo -e "\033[1;34m$1\033[0m"
+}
+
 warn() {
   echo "::warning :: $1"
 }
@@ -32,7 +36,7 @@ fi
 
 if [ -n "$extra_system_packages" ]; then
   for pkg in $extra_system_packages; do
-    echo "Install $pkg by apk"
+    info "Install $pkg by apk"
     apk --no-cache add "$pkg"
   done
 fi
@@ -46,7 +50,7 @@ if [ -n "$working_directory" ]; then
 fi
 
 if [ -n "$pre_compile" ]; then
-  echo "Run pre compile commands"
+  info "Run pre compile commands"
   eval "$pre_compile"
 fi
 
@@ -55,7 +59,7 @@ echo "$root_file" | while IFS= read -r f; do
     continue
   fi
 
-  echo "Compile $f"
+  info "Compile $f"
 
   if [ ! -f "$f" ]; then
     error "File '$f' cannot be found from the directory '$PWD'."
@@ -66,6 +70,6 @@ echo "$root_file" | while IFS= read -r f; do
 done
 
 if [ -n "$post_compile" ]; then
-  echo "Run post compile commands"
+  info "Run post compile commands"
   eval "$post_compile"
 fi
