@@ -17,6 +17,10 @@ inputs:
     description: "[Deprecated] Install extra packages by tlmgr"
   extra_system_packages:
     description: Install extra packages by apk
+  pre_compile:
+    description: Arbitrary bash codes to be executed before compiling LaTeX documents
+  post_compile:
+    description: Arbitrary bash codes to be executed after compiling LaTeX documents
 runs:
   using: docker
   image: Dockerfile
@@ -27,6 +31,8 @@ runs:
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
     - ${{ inputs.extra_system_packages }}
+    - ${{ inputs.pre_compile }}
+    - ${{ inputs.post_compile }}
 branding:
   icon: book
   color: blue

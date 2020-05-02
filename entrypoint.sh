@@ -17,6 +17,8 @@ compiler="$3"
 args="$4"
 extra_packages="$5"
 extra_system_packages="$6"
+pre_compile="$7"
+post_compile="$7"
 
 if [ -z "$root_file" ]; then
   error "Input 'root_file' is missing."
@@ -43,9 +45,17 @@ if [ -n "$working_directory" ]; then
   cd "$working_directory"
 fi
 
+if [ -n "$pre_compile" ]; then
+  eval "$pre_compile"
+fi
+
 if [ ! -f "$root_file" ]; then
   error "File '$root_file' cannot be found from the directory '$PWD'."
 fi
 
 # shellcheck disable=SC2086
 "$compiler" $args "$root_file"
+
+if [ -n "$post_compile" ]; then
+  eval "$post_compile"
+fi

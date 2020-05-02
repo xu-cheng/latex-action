@@ -28,6 +28,14 @@ It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a ful
 
     The extra packages to be installed by [`apk`](https://pkgs.alpinelinux.org/packages) separated by space. For example, `extra_system_packages: "py-pygments"` will install the package `py-pygments` to be used by the `minted` for code highlights.
 
+* `pre_compile`
+
+    Arbitrary bash codes to be executed before compiling LaTeX documents. For example, `pre_compile: tlmgr update --all` to update all TeXLive packages.
+
+* `post_compile`
+
+    Arbitrary bash codes to be executed after compiling LaTeX documents. For example, `post_compile: latexmk -c` to clean up temporary files.
+
 ## Example
 
 ```yaml

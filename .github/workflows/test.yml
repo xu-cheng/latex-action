@@ -11,6 +11,15 @@ jobs:
         with:
           root_file: test.tex
           working_directory: test/
+      - name: Compile LaTeX document with pre/post compile actions
+        uses: ./
+        with:
+          root_file: test.tex
+          working_directory: test/
+          pre_compile: |
+            rm test.pdf
+          post_compile: |
+            file test.pdf | grep -q ' PDF '
       - name: Compile LaTeX document with math symbols
         uses: ./
         with:
@@ -55,6 +64,10 @@ jobs:
           extra_packages: # optional
           # Install extra packages by apk
           extra_system_packages: # optional
+          # Arbitrary bash codes to be executed before compiling LaTeX documents
+          pre_compile: # optional
+          # Arbitrary bash codes to be executed after compiling LaTeX documents
+          post_compile: # optional
       - name: Check pdf files
         run: |
           file test/test.pdf | grep -q ' PDF '
