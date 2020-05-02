@@ -10,7 +10,14 @@ It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a ful
 
 * `root_file`
 
-    The root LaTeX file to be compiled. This input is required.
+    The root LaTeX file to be compiled. This input is required. You can also pass multiple files as a multi-line string to compile multiple documents. For example:
+    ```yaml
+    - uses: xu-cheng/latex-action@master
+      with:
+        root_file: |
+          file1.tex
+          file2.tex
+    ```
 
 * `working_directory`
 

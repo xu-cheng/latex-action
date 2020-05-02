@@ -20,6 +20,13 @@ jobs:
             rm test.pdf
           post_compile: |
             ls test.pdf
+      - name: Compile multiple LaTeX documents
+        uses: ./
+        with:
+          root_file: |
+            file1.tex
+            file2.tex
+          working_directory: test/
       - name: Compile LaTeX document with math symbols
         uses: ./
         with:
@@ -71,6 +78,8 @@ jobs:
       - name: Check pdf files
         run: |
           file test/test.pdf | grep -q ' PDF '
+          file test/file1.pdf | grep -q ' PDF '
+          file test/file2.pdf | grep -q ' PDF '
           file test/math.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
           file test/eps.pdf | grep -q ' PDF '

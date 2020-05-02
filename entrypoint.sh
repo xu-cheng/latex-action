@@ -50,12 +50,20 @@ if [ -n "$pre_compile" ]; then
   eval "$pre_compile"
 fi
 
-if [ ! -f "$root_file" ]; then
-  error "File '$root_file' cannot be found from the directory '$PWD'."
-fi
+echo "$root_file" | while IFS= read -r f; do
+  if [ -z "$f" ]; then
+    continue
+  fi
 
-# shellcheck disable=SC2086
-"$compiler" $args "$root_file"
+  echo "Compile $f"
+
+  if [ ! -f "$f" ]; then
+    error "File '$f' cannot be found from the directory '$PWD'."
+  fi
+
+  # shellcheck disable=SC2086
+  "$compiler" $args "$f"
+done
 
 if [ -n "$post_compile" ]; then
   echo "Run post compile commands"
