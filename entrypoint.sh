@@ -46,6 +46,7 @@ if [ -n "$working_directory" ]; then
 fi
 
 if [ -n "$pre_compile" ]; then
+  echo "Run pre compile commands"
   eval "$pre_compile"
 fi
 
@@ -57,5 +58,6 @@ fi
 "$compiler" $args "$root_file"
 
 if [ -n "$post_compile" ]; then
+  echo "Run post compile commands"
   eval "$post_compile"
 fi
