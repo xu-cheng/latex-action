@@ -57,7 +57,7 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@master
+        uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
 ```
