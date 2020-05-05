@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@master
         with:
