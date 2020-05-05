@@ -6,6 +6,8 @@ GitHub Action to compile LaTeX documents.
 
 It runs in [a docker image](https://github.com/xu-cheng/latex-docker) with a full [TeXLive](https://www.tug.org/texlive/) environment installed.
 
+If you want to run arbitrary commands in a TeXLive environment, use [texlive-action](https://github.com/xu-cheng/texlive-action) instead.
+
 ## Inputs
 
 * `root_file`
