@@ -14,7 +14,7 @@ If you want to run arbitrary commands in a TeXLive environment, use [texlive-act
 
     The root LaTeX file to be compiled. This input is required. You can also pass multiple files as a multi-line string to compile multiple documents. For example:
     ```yaml
-    - uses: xu-cheng/latex-action@master
+    - uses: xu-cheng/latex-action@v2
       with:
         root_file: |
           file1.tex
