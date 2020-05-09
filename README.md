@@ -81,14 +81,16 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 
 ### It fails due to `xindy` cannot be found.
 
-This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in TeXLive. To work around this, try [this](https://github.com/xu-cheng/latex-action/issues/32#issuecomment-626086551).
+This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in TeXLive. To work around it, try [this](https://github.com/xu-cheng/latex-action/issues/32#issuecomment-626086551).
 
 ### It fails to build the document, how to solve it?
 
 * Try to solve the problem by examining the build log.
 * Try to build the document locally.
-* You can also try to narrow the problem by creating a minimal working example to reproduce the problem.
-* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help. Please include a [minimum working example](https://tex.meta.stackexchange.com/questions/3300/minimum-working-example-mwe) to demonstrate your problem.
+* You can also try to narrow the problem by creating a [minimum working example][mwe] to reproduce the problem.
+* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help. Please include a [minimum working example][mwe] to demonstrate your problem.
+
+[mwe]: https://tex.meta.stackexchange.com/questions/3300/minimum-working-example-mwe
 
 ## License
 
