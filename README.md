@@ -84,7 +84,7 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 * Try to solve the problem by examining the build log.
 * Try to build the document locally.
 * You can also try to narrow the problem by creating a minimal working example to reproduce the problem.
-* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help.
+* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help. Please include a [minimum working example](https://tex.meta.stackexchange.com/questions/3300/minimum-working-example-mwe) to demonstrate your problem.
 
 ## License
 
