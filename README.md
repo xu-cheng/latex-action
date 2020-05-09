@@ -79,6 +79,10 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 * You can use [`@actions/upload-release-asset`](https://github.com/actions/upload-release-asset) to upload PDF file to the Github Release.
 * You can use normal shell tools such as `scp`/`git`/`rsync` to upload PDF file anywhere. For example, you can git push to the `gh-pages` branch in your repo, so you can view the document using Github Pages.
 
+### It fails due to `xindy` cannot be found.
+
+This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in TeXLive. To work around this, try [this](https://github.com/xu-cheng/latex-action/issues/32#issuecomment-626086551).
+
 ### It fails to build the document, how to solve it?
 
 * Try to solve the problem by examining the build log.
