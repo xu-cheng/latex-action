@@ -31,7 +31,7 @@ If you want to run arbitrary commands in a TeXLive environment, use [texlive-act
 
 * `args`
 
-    The extra arguments to be passed to the LaTeX engine. By default, it is `-pdf -file-line-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
+    The extra arguments to be passed to the LaTeX engine. By default, it is `-pdf -file-line-error -halt-on-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 * `extra_system_packages`
 
@@ -66,11 +66,11 @@ jobs:
 
 ### How to use XeLaTeX or LuaLaTeX instead of pdfLaTeX?
 
-By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, you can set the `args` to `-xelatex -file-line-error -interaction=nonstopmode` or `-lualatex --file-line-error --interaction=nonstopmode` respectively. Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
+By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, you can set the `args` to `-xelatex -file-line-error -halt-on-error -interaction=nonstopmode` or `-lualatex --file-line-error --halt-on-error --interaction=nonstopmode` respectively. Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 ### How to enable `--shell-escape`?
 
-To enable `--shell-escape`, you should add it to `args`. For example, set `args` to `-pdf -file-line-error -interaction=nonstopmode -shell-escape` when using pdfLaTeX.
+To enable `--shell-escape`, you should add it to `args`. For example, set `args` to `-pdf -file-line-error -halt-on-error -interaction=nonstopmode -shell-escape` when using pdfLaTeX.
 
 ### Where is the PDF file? How to upload it?
 
