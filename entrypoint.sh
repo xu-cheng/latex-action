@@ -44,6 +44,10 @@ if [[ "$compiler" = "latexmk" ]]; then
     args+=("-shell-escape")
   fi
 
+  if [[ -n "$latexmk_use_lualatex" && -n "$latexmk_use_xelatex" ]]; then
+    error "Input 'latexmk_use_lualatex' and 'latexmk_use_xelatex' cannot be used at the same time."
+  fi
+
   if [[ -n "$latexmk_use_lualatex" ]]; then
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
