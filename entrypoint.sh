@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -24,52 +24,53 @@ extra_system_packages="$6"
 pre_compile="$7"
 post_compile="$8"
 
-if [ -z "$root_file" ]; then
+if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
 
-if [ -z "$compiler" ] && [ -z "$args" ]; then
+if [[ -z "$compiler" && -z "$args" ]]; then
   warn "Input 'compiler' and 'args' are both empty. Reset them to default values."
   compiler="latexmk"
   args="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
 fi
 
-if [ -n "$extra_system_packages" ]; then
+IFS=' ' read -r -a args <<< "$args"
+
+if [[ -n "$extra_system_packages" ]]; then
   for pkg in $extra_system_packages; do
     info "Install $pkg by apk"
     apk --no-cache add "$pkg"
   done
 fi
 
-if [ -n "$extra_packages" ]; then
+if [[ -n "$extra_packages" ]]; then
   warn "Input 'extra_packages' is deprecated. We now build LaTeX document with full TeXLive installed."
 fi
 
-if [ -n "$working_directory" ]; then
+if [[ -n "$working_directory" ]]; then
   cd "$working_directory"
 fi
 
-if [ -n "$pre_compile" ]; then
+if [[ -n "$pre_compile" ]]; then
   info "Run pre compile commands"
   eval "$pre_compile"
 fi
 
-echo "$root_file" | while IFS= read -r f; do
-  if [ -z "$f" ]; then
+while IFS= read -r f; do
+  if [[ -z "$f" ]]; then
     continue
   fi
 
   info "Compile $f"
 
-  if [ ! -f "$f" ]; then
+  if [[ ! -f "$f" ]]; then
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
-  # shellcheck disable=SC2086
-  "$compiler" $args "$f"
-done
+  "$compiler" "${args[@]}" "$f"
+done <<< "$root_file"
 
-if [ -n "$post_compile" ]; then
+if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
   eval "$post_compile"
 fi
