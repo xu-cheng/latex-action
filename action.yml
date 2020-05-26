@@ -21,6 +21,12 @@ inputs:
     description: Arbitrary bash codes to be executed before compiling LaTeX documents
   post_compile:
     description: Arbitrary bash codes to be executed after compiling LaTeX documents
+  latexmk_shell_escape:
+    description: Instruct latexmk to enable --shell-escape
+  latexmk_use_lualatex:
+    description: Instruct latexmk to use LuaLaTeX
+  latexmk_use_xelatex:
+    description: Instruct latexmk to use XeLaTeX
 runs:
   using: docker
   image: Dockerfile
@@ -33,6 +39,9 @@ runs:
     - ${{ inputs.extra_system_packages }}
     - ${{ inputs.pre_compile }}
     - ${{ inputs.post_compile }}
+    - ${{ inputs.latexmk_shell_escape }}
+    - ${{ inputs.latexmk_use_lualatex }}
+    - ${{ inputs.latexmk_use_xelatex }}
 branding:
   icon: book
   color: blue

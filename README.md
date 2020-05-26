@@ -45,6 +45,20 @@ If you want to run arbitrary commands in a TeXLive environment, use [texlive-act
 
     Arbitrary bash codes to be executed after compiling LaTeX documents. For example, `post_compile: "latexmk -c"` to clean up temporary files.
 
+The following inputs are only valid if input `compiler` is not changed.
+
+* `latexmk_shell_escape`
+
+    Instruct `latexmk` to enable `--shell-escape`
+
+* `latexmk_use_lualatex`
+
+    Instruct `latexmk` to use LuaLaTeX
+
+* `latexmk_use_xelatex`
+
+    Instruct `latexmk` to use XeLaTeX
+
 ## Example
 
 ```yaml
@@ -66,11 +80,34 @@ jobs:
 
 ### How to use XeLaTeX or LuaLaTeX instead of pdfLaTeX?
 
-By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, you can set the `args` to `-xelatex -file-line-error -halt-on-error -interaction=nonstopmode` or `-lualatex --file-line-error --halt-on-error --interaction=nonstopmode` respectively. Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
+By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, you can set the `latexmk_use_xelatex` or `latexmk_use_lualatex` input respectively. For example:
+
+```yaml
+- uses: xu-cheng/latex-action@v2
+  with:
+    root_file: main.tex
+    latexmk_use_xelatex: true
+```
+
+```yaml
+- uses: xu-cheng/latex-action@v2
+  with:
+    root_file: main.tex
+    latexmk_use_lualatex: true
+```
+
+Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 ### How to enable `--shell-escape`?
 
-To enable `--shell-escape`, you should add it to `args`. For example, set `args` to `-pdf -file-line-error -halt-on-error -interaction=nonstopmode -shell-escape` when using pdfLaTeX.
+To enable `--shell-escape`, set the `latexmk_shell_escape` input.
+
+```yaml
+- uses: xu-cheng/latex-action@v2
+  with:
+    root_file: main.tex
+    latexmk_shell_escape: true
+```
 
 ### Where is the PDF file? How to upload it?
 
