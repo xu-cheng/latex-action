@@ -45,19 +45,19 @@ If you want to run arbitrary commands in a TeXLive environment, use [texlive-act
 
     Arbitrary bash codes to be executed after compiling LaTeX documents. For example, `post_compile: "latexmk -c"` to clean up temporary files.
 
-The following inputs are only valid if input `compiler` is not changed.
+**The following inputs are only valid if the input `compiler` is not changed.**
 
 * `latexmk_shell_escape`
 
-    Instruct `latexmk` to enable `--shell-escape`
+    Instruct `latexmk` to enable `--shell-escape`.
 
 * `latexmk_use_lualatex`
 
-    Instruct `latexmk` to use LuaLaTeX
+    Instruct `latexmk` to use LuaLaTeX.
 
 * `latexmk_use_xelatex`
 
-    Instruct `latexmk` to use XeLaTeX
+    Instruct `latexmk` to use XeLaTeX.
 
 ## Example
 
