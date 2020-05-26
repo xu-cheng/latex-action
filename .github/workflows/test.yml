@@ -42,12 +42,13 @@ jobs:
         with:
           root_file: eps.tex
           working_directory: test/
-      - name: Compile LaTeX document with minted
+      - name: Compile LaTeX document with minted and lualatex
         uses: ./
         with:
           root_file: minted.tex
           working_directory: test/
-          args: "-pdf -shell-escape -file-line-error -interaction=nonstopmode"
+          latexmk_shell_escape: true
+          latexmk_use_lualatex: true
       - name: Compile LaTeX document with arara and graphviz
         uses: ./
         with:
@@ -66,7 +67,7 @@ jobs:
           # The LaTeX engine to be invoked
           compiler: # optional, default is latexmk
           # Extra arguments to be passed to the LaTeX engine
-          args: # optional, default is -pdf -file-line-error -interaction=nonstopmode
+          args: # optional, default is -pdf -file-line-error -halt-on-error -interaction=nonstopmode
           # [Deprecated] Install extra packages by tlmgr
           extra_packages: # optional
           # Install extra packages by apk
@@ -75,6 +76,12 @@ jobs:
           pre_compile: # optional
           # Arbitrary bash codes to be executed after compiling LaTeX documents
           post_compile: # optional
+          # Instruct latexmk to enable --shell-escape
+          latexmk_shell_escape: # optional
+          # Instruct latexmk to use LuaLaTeX
+          latexmk_use_lualatex: # optional
+          # Instruct latexmk to use XeLaTeX
+          latexmk_use_xelatex: # optional
       - name: Check pdf files
         run: |
           file test/test.pdf | grep -q ' PDF '
