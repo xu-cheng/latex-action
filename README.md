@@ -124,10 +124,10 @@ This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in
 
 * Try to solve the problem by examining the build log.
 * Try to build the document locally.
-* You can also try to narrow the problem by creating a [minimum working example][mwe] to reproduce the problem.
-* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help. Please include a [minimum working example][mwe] to demonstrate your problem.
+* You can also try to narrow the problem by creating a [minimal working example][mwe] to reproduce the problem.
+* [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help. Please include a [minimal working example][mwe] to demonstrate your problem.
 
-[mwe]: https://tex.meta.stackexchange.com/questions/3300/minimum-working-example-mwe
+[mwe]: https://tex.meta.stackexchange.com/questions/228/ive-just-been-asked-to-write-a-minimal-working-example-mwe-what-is-that
 
 ## License
 
