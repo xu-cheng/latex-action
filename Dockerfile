@@ -1,4 +1,4 @@
-FROM xucheng/texlive-full:latest
+FROM ghcr.io/xu-cheng/texlive-full:latest
 
 COPY \
   LICENSE \
