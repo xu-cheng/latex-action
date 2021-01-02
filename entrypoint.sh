@@ -94,6 +94,9 @@ if [[ -n "$extra_packages" ]]; then
 fi
 
 if [[ -n "$working_directory" ]]; then
+  if [[ ! -d "$working_directory" ]]; then
+    mkdir -p "$working_directory"
+  fi
   cd "$working_directory"
 fi
 
