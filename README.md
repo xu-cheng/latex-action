@@ -130,7 +130,7 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 
 ### How to add additional paths to the LaTeX input search path?
 
-Sometimes you may have custom package (`.sty`) or class file (`.cls`) in other directories. If you want to add these directories to the LaTeX input search path, you can add them in `TEXINPUTS` environment variable. For example:
+Sometimes you may have custom package (`.sty`) or class (`.cls`) files in other directories. If you want to add these directories to the LaTeX input search path, you can add them in `TEXINPUTS` environment variable. For example:
 
 ```yaml
 - name: Download custom template
