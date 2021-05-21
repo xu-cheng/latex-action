@@ -128,6 +128,26 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 * You can use [`@softprops/action-gh-release`](https://github.com/softprops/action-gh-release) to upload PDF file to the Github Release.
 * You can use normal shell tools such as `scp`/`git`/`rsync` to upload PDF file anywhere. For example, you can git push to the `gh-pages` branch in your repo, so you can view the document using Github Pages.
 
+### How to add additional paths to the LaTeX input search path?
+
+Sometimes you may have custom package (`.sty`) or class file (`.cls`) in other directories. If you want to add these directories to the LaTeX input search path, you can add them in `TEXINPUTS` environment variable. For example:
+
+```yaml
+- name: Download custom template
+  run: |
+    curl -OL https://example.com/custom_template.zip
+    unzip custom_template.zip
+- uses: xu-cheng/latex-action@v2
+  with:
+    root_file: main.tex
+  env:
+    TEXINPUTS: ".:./custom_template//:"
+```
+
+Noted that you should NOT use `{{ github.workspace }}` or `$GITHUB_WORKSPACE` in `TEXINPUTS`. This action works in a separated docker container, where the workspace directory is mounted into it. Therefore, the workspace directory inside the docker container is different from `github.workspace`.
+
+You can find more information of `TEXINPUTS` [here](https://tex.stackexchange.com/a/93733).
+
 ### It fails due to `xindy` cannot be found.
 
 This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in TeXLive. To work around it, try [this](https://github.com/xu-cheng/latex-action/issues/32#issuecomment-626086551).
