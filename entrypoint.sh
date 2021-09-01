@@ -112,7 +112,7 @@ while IFS= read -r f; do
 
   info "Compile $f"
 
-  if [[ ! -f "$f" ]]; then
+  if ! compgen -G "$f" > /dev/null; then
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
