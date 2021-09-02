@@ -16,28 +16,39 @@ error() {
 }
 
 root_file="${1}"
-working_directory="${2}"
-compiler="${3}"
-args="${4}"
-extra_packages="${5}"
-extra_system_packages="${6}"
-pre_compile="${7}"
-post_compile="${8}"
-latexmk_shell_escape="${9}"
-latexmk_use_lualatex="${10}"
-latexmk_use_xelatex="${11}"
+glob_root_file="${2}"
+working_directory="${3}"
+compiler="${4}"
+args="${5}"
+extra_packages="${6}"
+extra_system_packages="${7}"
+pre_compile="${8}"
+post_compile="${9}"
+latexmk_shell_escape="${10}"
+latexmk_use_lualatex="${11}"
+latexmk_use_xelatex="${12}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
 
-IFS=$'\n' read -rd '' -a root_file <<< "$root_file"
+readarray -t root_file <<< "$root_file"
 
 if [[ -n "$working_directory" ]]; then
   if [[ ! -d "$working_directory" ]]; then
     mkdir -p "$working_directory"
   fi
   cd "$working_directory"
+fi
+
+if [[ -s "$glob_root_file" ]]; then
+    expanded_root_file=()
+    for pattern in "${root_file[@]}"; do
+      expanded="$(compgen -G "$pattern" || echo "$pattern")"
+      readarray -t files <<< "$expanded"
+      expanded_root_file+=("${files[@]}")
+    done
+    root_file=("${expanded_root_file[@]}")
 fi
 
 if [[ -z "$compiler" && -z "$args" ]]; then

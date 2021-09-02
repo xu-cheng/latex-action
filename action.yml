@@ -5,8 +5,10 @@ inputs:
   root_file:
     description: The root LaTeX file to be compiled
     required: true
+  glob_root_file:
+    description: Interpret the root_file input as bash glob pattern
   working_directory:
-    description: The working directory for the LaTeX engine
+    description: The working directory for this action
   compiler:
     description: The LaTeX engine to be invoked
     default: latexmk
@@ -32,6 +34,7 @@ runs:
   image: Dockerfile
   args:
     - ${{ inputs.root_file }}
+    - ${{ inputs.glob_root_file }}
     - ${{ inputs.working_directory }}
     - ${{ inputs.compiler }}
     - ${{ inputs.args }}

@@ -23,9 +23,19 @@ Each input is provided as a key inside the `with` section of the action.
           file2.tex
     ```
 
+* `glob_root_file`
+
+    If set, interpret the `root_file` input as bash glob pattern. For example:
+    ```yaml
+    - uses: xu-cheng/latex-action@v2
+      with:
+        root_file: "*.tex"
+        glob_root_file: true
+    ```
+
 * `working_directory`
 
-    The working directory for the LaTeX engine.
+    The working directory for this action.
 
 * `compiler`
 
