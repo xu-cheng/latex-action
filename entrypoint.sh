@@ -33,6 +33,13 @@ fi
 
 IFS=$'\n' read -rd '' -a root_file <<< "$root_file"
 
+if [[ -n "$working_directory" ]]; then
+  if [[ ! -d "$working_directory" ]]; then
+    mkdir -p "$working_directory"
+  fi
+  cd "$working_directory"
+fi
+
 if [[ -z "$compiler" && -z "$args" ]]; then
   warn "Input 'compiler' and 'args' are both empty. Reset them to default values."
   compiler="latexmk"
@@ -93,13 +100,6 @@ fi
 
 if [[ -n "$extra_packages" ]]; then
   warn "Input 'extra_packages' is deprecated. We now build LaTeX document with full TeXLive installed."
-fi
-
-if [[ -n "$working_directory" ]]; then
-  if [[ ! -d "$working_directory" ]]; then
-    mkdir -p "$working_directory"
-  fi
-  cd "$working_directory"
 fi
 
 if [[ -n "$pre_compile" ]]; then
