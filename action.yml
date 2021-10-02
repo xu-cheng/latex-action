@@ -29,6 +29,8 @@ inputs:
     description: Instruct latexmk to use LuaLaTeX
   latexmk_use_xelatex:
     description: Instruct latexmk to use XeLaTeX
+  latexmk_use_pdflatex:
+    description: Instruct latexmk to use PDFLaTeX
 runs:
   using: docker
   image: Dockerfile

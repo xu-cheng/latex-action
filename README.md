@@ -71,6 +71,11 @@ Each input is provided as a key inside the `with` section of the action.
 
     Instruct `latexmk` to use XeLaTeX.
 
+* `latexmk_use_pdflatex`
+
+    Instruct `latexmk` to use PDFLaTeX.
+
+
 ## Example
 
 ```yaml

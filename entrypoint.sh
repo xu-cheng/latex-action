@@ -27,12 +27,13 @@ post_compile="${9}"
 latexmk_shell_escape="${10}"
 latexmk_use_lualatex="${11}"
 latexmk_use_xelatex="${12}"
+latexmk_use_pdflatex="${13}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
 
-readarray -t root_file <<< "$root_file"
+readarray -t root_file <<<"$root_file"
 
 if [[ -n "$working_directory" ]]; then
   if [[ ! -d "$working_directory" ]]; then
@@ -42,13 +43,13 @@ if [[ -n "$working_directory" ]]; then
 fi
 
 if [[ -n "$glob_root_file" ]]; then
-    expanded_root_file=()
-    for pattern in "${root_file[@]}"; do
-      expanded="$(compgen -G "$pattern" || echo "$pattern")"
-      readarray -t files <<< "$expanded"
-      expanded_root_file+=("${files[@]}")
-    done
-    root_file=("${expanded_root_file[@]}")
+  expanded_root_file=()
+  for pattern in "${root_file[@]}"; do
+    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    readarray -t files <<<"$expanded"
+    expanded_root_file+=("${files[@]}")
+  done
+  root_file=("${expanded_root_file[@]}")
 fi
 
 if [[ -z "$compiler" && -z "$args" ]]; then
@@ -57,15 +58,15 @@ if [[ -z "$compiler" && -z "$args" ]]; then
   args="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
 fi
 
-IFS=' ' read -r -a args <<< "$args"
+IFS=' ' read -r -a args <<<"$args"
 
 if [[ "$compiler" = "latexmk" ]]; then
   if [[ -n "$latexmk_shell_escape" ]]; then
     args+=("-shell-escape")
   fi
 
-  if [[ -n "$latexmk_use_lualatex" && -n "$latexmk_use_xelatex" ]]; then
-    error "Input 'latexmk_use_lualatex' and 'latexmk_use_xelatex' cannot be used at the same time."
+  if [[ -n "$latexmk_use_lualatex" && -n "$latexmk_use_xelatex" || -n "$latexmk_use_lualatex" && -n "$latexmk_use_pdflatex" || -n "$latexmk_use_pdflatex" && -n "$latexmk_use_xelatex" ]]; then
+    error "Input 'latexmk_use_lualatex' and 'latexmk_use_xelatex' and 'latexmk_use_pdflatex' cannot be used at the same time."
   fi
 
   if [[ -n "$latexmk_use_lualatex" ]]; then
@@ -94,6 +95,16 @@ if [[ "$compiler" = "latexmk" ]]; then
     done
     args+=("-xelatex")
   fi
+
+  if [[ -n "$latexmk_use_pdflatex" ]]; then
+    for i in "${!args[@]}"; do
+      if [[ "${args[i]}" = "-pdf" ]]; then
+        unset 'args[i]'
+      fi
+    done
+    args+=("-pdflatex")
+  fi
+
 else
   for VAR in "${!latexmk_@}"; do
     if [[ -n "${!VAR}" ]]; then
