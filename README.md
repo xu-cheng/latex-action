@@ -112,6 +112,13 @@ By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, y
     root_file: main.tex
     latexmk_use_lualatex: true
 ```
+```yaml
+- uses: xu-cheng/latex-action@v2
+  with:
+    root_file: main.tex
+    latexmk_use_pdflatex: true
+```
+
 
 Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
@@ -139,6 +146,18 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
   ```
 
   It will result in a `PDF.zip` being uploaded with `main.pdf` contained inside.
+
+* Or you can use wildcard to upload a zip containing all PDF file to the workflow tab. For example you can add
+
+  ```yaml
+  - uses: actions/upload-artifact@v2
+    with:
+      name: PDF
+      path: '*.pdf'
+  ```
+
+  It will result in a `PDF.zip` being uploaded with `main.pdf` contained inside.
+
 
 * You can use [`@softprops/action-gh-release`](https://github.com/softprops/action-gh-release) to upload PDF file to the Github Release.
 * You can use normal shell tools such as `scp`/`git`/`rsync` to upload PDF file anywhere. For example, you can git push to the `gh-pages` branch in your repo, so you can view the document using Github Pages.
