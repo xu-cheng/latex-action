@@ -28,6 +28,7 @@ latexmk_shell_escape="${10}"
 latexmk_use_lualatex="${11}"
 latexmk_use_xelatex="${12}"
 latexmk_use_pdflatex="${13}"
+use_bibtex="${14}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -140,7 +141,15 @@ for f in "${root_file[@]}"; do
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
-  "$compiler" "${args[@]}" "$f"
+  if [[ -n "$use_bibtex" ]]; then
+    "$compiler" "${args[@]}" "$f"
+    bibtex "$f"
+    "$compiler" "${args[@]}" "$f"
+    "$compiler" "${args[@]}" "$f"
+  else
+    "$compiler" "${args[@]}" "$f"
+  fi
+
 done
 
 if [[ -n "$post_compile" ]]; then

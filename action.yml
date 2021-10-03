@@ -31,6 +31,8 @@ inputs:
     description: Instruct latexmk to use XeLaTeX
   latexmk_use_pdflatex:
     description: Instruct latexmk to use PDFLaTeX
+  use_bibtex:
+    description: Use BibTeX to compile reference (Complex Compile)
 runs:
   using: docker
   image: Dockerfile
@@ -47,6 +49,7 @@ runs:
     - ${{ inputs.latexmk_shell_escape }}
     - ${{ inputs.latexmk_use_lualatex }}
     - ${{ inputs.latexmk_use_xelatex }}
+    - ${{ inputs.use_bibtex }}
 branding:
   icon: book
   color: blue
