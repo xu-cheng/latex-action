@@ -1,6 +1,6 @@
 # latex-action
 
-[![GitHub Actions Status](https://github.com/xu-cheng/latex-action/workflows/Test%20GitHub%20Action/badge.svg)](https://github.com/xu-cheng/latex-action/actions)
+[![GitHub Actions Status](https://github.com/xu-cheng/latex-action/workflows/Test%20Github%20Action/badge.svg)](https://github.com/xu-cheng/latex-action/actions)
 
 GitHub Action to compile LaTeX documents.
 
@@ -194,6 +194,24 @@ This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in
 * [Open an issue](https://github.com/xu-cheng/latex-action/issues/new) if you need help. Please include a [minimal working example][mwe] to demonstrate your problem.
 
 [mwe]: https://tex.meta.stackexchange.com/questions/228/ive-just-been-asked-to-write-a-minimal-working-example-mwe-what-is-that
+
+### How to compile reference by bibtex or complex compile?
+
++ First of all, you should specify the compiler in `PDFLaTeX` or `LuaLaTeX` or `XeLaTeX` or keep it blank to use default.
++ Set `use_bibtex` to `true`
+
+```yaml
+- uses: xu-cheng/latex-action@v2
+  with:
+    root_file: main.tex
+    latexmk_use_xelatex: true
+    use_bibtex: true
+```
+
++ If you use snippet above, it will follow the path below.
++ XeLaTeX -> BibTeX -> XeLaTeX -> XeLaTeX
+
+
 
 ## License
 
