@@ -27,12 +27,18 @@ post_compile="${9}"
 latexmk_shell_escape="${10}"
 latexmk_use_lualatex="${11}"
 latexmk_use_xelatex="${12}"
+custom_font_dir="${13}"
+
+if [[ -n "$custom_font_dir" ]]; then
+  cp $custom_font_dir/* /usr/share/fonts
+  mkfontscale && mkfontdir && fc-cache -fv
+fi
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
 
-readarray -t root_file <<< "$root_file"
+readarray -t root_file <<<"$root_file"
 
 if [[ -n "$working_directory" ]]; then
   if [[ ! -d "$working_directory" ]]; then
@@ -42,13 +48,13 @@ if [[ -n "$working_directory" ]]; then
 fi
 
 if [[ -n "$glob_root_file" ]]; then
-    expanded_root_file=()
-    for pattern in "${root_file[@]}"; do
-      expanded="$(compgen -G "$pattern" || echo "$pattern")"
-      readarray -t files <<< "$expanded"
-      expanded_root_file+=("${files[@]}")
-    done
-    root_file=("${expanded_root_file[@]}")
+  expanded_root_file=()
+  for pattern in "${root_file[@]}"; do
+    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    readarray -t files <<<"$expanded"
+    expanded_root_file+=("${files[@]}")
+  done
+  root_file=("${expanded_root_file[@]}")
 fi
 
 if [[ -z "$compiler" && -z "$args" ]]; then
@@ -57,7 +63,7 @@ if [[ -z "$compiler" && -z "$args" ]]; then
   args="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
 fi
 
-IFS=' ' read -r -a args <<< "$args"
+IFS=' ' read -r -a args <<<"$args"
 
 if [[ "$compiler" = "latexmk" ]]; then
   if [[ -n "$latexmk_shell_escape" ]]; then
