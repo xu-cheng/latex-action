@@ -7,42 +7,30 @@ inputs:
     required: true
   glob_root_file:
     description: Interpret the root_file input as bash glob pattern
-    required: true
   working_directory:
     description: The working directory for this action
-    required: false
   compiler:
     description: The LaTeX engine to be invoked
     default: latexmk
-    required: true
   args:
     description: Extra arguments to be passed to the LaTeX engine
     default: "-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
-    required: true
   extra_packages:
     description: "[Deprecated] Install extra packages by tlmgr"
-    required: false
   extra_system_packages:
     description: Install extra packages by apk
-    required: false
+  extra_fonts:
+    description: Add extra fonts by fontconfig. It supports glob patterns.
   pre_compile:
     description: Arbitrary bash codes to be executed before compiling LaTeX documents
-    required: false
   post_compile:
     description: Arbitrary bash codes to be executed after compiling LaTeX documents
-    required: false
   latexmk_shell_escape:
     description: Instruct latexmk to enable --shell-escape
-    required: false
   latexmk_use_lualatex:
     description: Instruct latexmk to use LuaLaTeX
-    required: false
   latexmk_use_xelatex:
     description: Instruct latexmk to use XeLaTeX
-    required: false
-  custom_font_dir:
-    description: Your custom font directory
-    required: false
 runs:
   using: docker
   image: Dockerfile
@@ -59,7 +47,7 @@ runs:
     - ${{ inputs.latexmk_shell_escape }}
     - ${{ inputs.latexmk_use_lualatex }}
     - ${{ inputs.latexmk_use_xelatex }}
-    - ${{ inputs.custom_font_dir }}
+    - ${{ inputs.extra_fonts }}
 branding:
   icon: book
   color: blue
