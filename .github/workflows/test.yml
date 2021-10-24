@@ -65,6 +65,18 @@ jobs:
           working_directory: test/
           compiler: arara
           args: "--verbose"
+      - name: Compile LaTeX document with extra_fonts and XeLaTeX
+        uses: ./
+        with:
+          root_file: extra_fonts.tex
+          working_directory: test/
+          pre_compile: |
+            apk add p7zip wget --no-cache
+            mkdir -p ./test/fonts/
+            wget https://github.com/be5invis/Sarasa-Gothic/releases/download/v0.34.7/sarasa-gothic-ttf-0.34.7.7z
+            7z e sarasa-gothic-ttf-0.34.7.7z -r -ofonts/
+          latexmk_use_xelatex: true
+          extra_fonts: "./fonts"
       # https://github.com/xu-cheng/latex-action/issues/16
       - name: Test Action with Github Default Template
         uses: ./
@@ -104,9 +116,12 @@ jobs:
           file test/minted.pdf | grep -q ' PDF '
           file test/graphviz.pdf | grep -q ' PDF '
           file test/abc.pdf | grep -q ' PDF '
+          file test/extra_fonts.pdf | grep -q ' PDF '
       - name: Upload
         uses: actions/upload-artifact@master
         with:
           name: test
-          path: test
+          path: |
+            test/*.pdf
+            test/*.log
         if: always()

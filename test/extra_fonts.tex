@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{fontspec, xunicode, xltxtra}
+\usepackage{xeCJK}
+\usepackage{listings}
+
+\usepackage{xcolor}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\setCJKfamilyfont{SMSC}{Sarasa Mono Slab SC}
+\newfontfamily\sgg{Sarasa Mono Slab SC}
+\newcommand{\sg}{\CJKfamily{SMSC}}
+
+\begin{document}
+
+\lstset{
+    language=C++,
+    basicstyle=\small\sg\sgg,
+    columns=fullflexible,
+    backgroundcolor=\color[rgb]{0.96,0.96,0.96},
+    extendedchars=false,
+    breakatwhitespace=true,
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stepnumber=1,
+    rulecolor=\color{black},
+    tabsize=4,
+    texcl=true,
+    frame=trBL,
+    sensitive=true,
+    frameround=fttt,
+    mathescape=false,
+    xleftmargin=3em,
+    xrightmargin=3em,
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve}
+}
+
+\begin{lstlisting}
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    cout << "Hello, 世界" << endl;
+    return 0;
+}
+\end{lstlisting}
+
+\end{document}

@@ -29,37 +29,23 @@ latexmk_use_lualatex="${11}"
 latexmk_use_xelatex="${12}"
 extra_fonts="${13}"
 
-if [[ -z "$root_file" ]]; then
-  error "Input 'root_file' is missing."
-fi
-
-readarray -t root_file <<< "$root_file"
-
-if [[ -n "$extra_fonts" ]]; then
-  # apk --no-cache add fontconfig
-  readarray -t extra_fonts <<< "$extra_fonts"
-  for f in "${extra_fonts[@]}"; do
-  if [[ -z "$f" ]]; then
-    continue
-  fi
-
-  info "Copying $f"
-
-  if [[ ! -f "$f" ]]; then
-    error "File '$f' cannot be found from the directory '$PWD'."
-  fi
-
-  "cp" "-r" "$f" "/usr/share/fonts"
-  done
-  fc-cache -fv
-fi
-
 if [[ -n "$working_directory" ]]; then
   if [[ ! -d "$working_directory" ]]; then
     mkdir -p "$working_directory"
   fi
   cd "$working_directory"
 fi
+
+if [[ -n "$pre_compile" ]]; then
+  info "Run pre compile commands"
+  eval "$pre_compile"
+fi
+
+if [[ -z "$root_file" ]]; then
+  error "Input 'root_file' is missing."
+fi
+
+readarray -t root_file <<< "$root_file"
 
 if [[ -n "$glob_root_file" ]]; then
     expanded_root_file=()
@@ -133,9 +119,28 @@ if [[ -n "$extra_packages" ]]; then
   warn "Input 'extra_packages' is deprecated. We now build LaTeX document with full TeXLive installed."
 fi
 
-if [[ -n "$pre_compile" ]]; then
-  info "Run pre compile commands"
-  eval "$pre_compile"
+if [[ -n "$extra_fonts" ]]; then
+  readarray -t extra_fonts <<< "$extra_fonts"
+  for pattern in "${extra_fonts[@]}"; do
+    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    readarray -t files <<< "$expanded"
+    expanded_extra_fonts+=("${files[@]}")
+  done
+  extra_fonts=("${expanded_extra_fonts[@]}")
+
+  for f in "${extra_fonts[@]}"; do
+    if [[ -z "$f" ]]; then
+      continue
+    fi
+
+    info "Copying $f"
+
+    if [[ ! -f "$f" && ! -d "$f" ]]; then
+      error "File/Directory '$f' cannot be found from the directory '$PWD'."
+    fi
+    "cp" "-r" "$f" "/usr/share/fonts"
+  done
+  fc-cache -fv
 fi
 
 for f in "${root_file[@]}"; do
@@ -151,6 +156,8 @@ for f in "${root_file[@]}"; do
 
   "$compiler" "${args[@]}" "$f"
 done
+
+chmod 0777 -R ./
 
 if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
