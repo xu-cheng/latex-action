@@ -49,6 +49,18 @@ Each input is provided as a key inside the `with` section of the action.
 
     The extra packages to be installed by [`apk`](https://pkgs.alpinelinux.org/packages) separated by space. For example, `extra_system_packages: "py-pygments"` will install the package `py-pygments` to be used by the `minted` for code highlights.
 
+* `extra_fonts`
+
+    Install extra `.ttf`/`.otf` fonts to be used by `fontspec`. You can also pass multiple files as a multi-line string. Each file path will be interpreted as glob pattern. For example:
+    ```yaml
+    - uses: xu-cheng/latex-action@v2
+      with:
+        root_file: main.tex
+        extra_fonts: |
+          ./path/to/custom.ttf
+          ./fonts/*.otf
+    ```
+
 * `pre_compile`
 
     Arbitrary bash codes to be executed before compiling LaTeX documents. For example, `pre_compile: "tlmgr update --self && tlmgr update --all"` to update all TeXLive packages.

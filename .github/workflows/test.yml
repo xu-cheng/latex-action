@@ -58,6 +58,17 @@ jobs:
           working_directory: test/
           latexmk_shell_escape: true
           latexmk_use_lualatex: true
+      - name: Download extra fonts
+        run: |
+          curl -L https://github.com/SorkinType/Fruktur/releases/download/v1.004/Fruktur.v1.004.zip -o Fruktur.zip
+          unzip Fruktur
+      - name: Compile LaTeX document with extra_fonts
+        uses: ./
+        with:
+          root_file: extra_fonts.tex
+          working_directory: test/
+          latexmk_use_xelatex: true
+          extra_fonts: "./../Fruktur-Regular.ttf"
       - name: Compile LaTeX document with arara and graphviz
         uses: ./
         with:
@@ -102,6 +113,7 @@ jobs:
           file test/biblatex.pdf | grep -q ' PDF '
           file test/eps.pdf | grep -q ' PDF '
           file test/minted.pdf | grep -q ' PDF '
+          file test/extra_fonts.pdf | grep -q ' PDF '
           file test/graphviz.pdf | grep -q ' PDF '
           file test/abc.pdf | grep -q ' PDF '
       - name: Upload

@@ -22,11 +22,12 @@ compiler="${4}"
 args="${5}"
 extra_packages="${6}"
 extra_system_packages="${7}"
-pre_compile="${8}"
-post_compile="${9}"
-latexmk_shell_escape="${10}"
-latexmk_use_lualatex="${11}"
-latexmk_use_xelatex="${12}"
+extra_fonts="${8}"
+pre_compile="${9}"
+post_compile="${10}"
+latexmk_shell_escape="${11}"
+latexmk_use_lualatex="${12}"
+latexmk_use_xelatex="${13}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -107,6 +108,30 @@ if [[ -n "$extra_system_packages" ]]; then
     info "Install $pkg by apk"
     apk --no-cache add "$pkg"
   done
+fi
+
+if [[ -n "$extra_fonts" ]]; then
+  readarray -t extra_fonts <<< "$extra_fonts"
+  expanded_extra_fonts=()
+  for pattern in "${extra_fonts[@]}"; do
+    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    readarray -t files <<< "$expanded"
+    expanded_extra_fonts+=("${files[@]}")
+  done
+  extra_fonts=("${expanded_extra_fonts[@]}")
+
+  mkdir -p "$HOME/.local/share/fonts/"
+
+  for f in "${extra_fonts[@]}"; do
+    if [[ -z "$f" ]]; then
+      continue
+    fi
+
+    info "Install font $f"
+    cp -r "$f" "$HOME/.local/share/fonts/"
+  done
+
+  fc-cache -fv
 fi
 
 if [[ -n "$extra_packages" ]]; then

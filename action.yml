@@ -19,6 +19,8 @@ inputs:
     description: "[Deprecated] Install extra packages by tlmgr"
   extra_system_packages:
     description: Install extra packages by apk
+  extra_fonts:
+    description: Add extra fonts by fontconfig. It supports glob patterns.
   pre_compile:
     description: Arbitrary bash codes to be executed before compiling LaTeX documents
   post_compile:
@@ -40,6 +42,7 @@ runs:
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
     - ${{ inputs.extra_system_packages }}
+    - ${{ inputs.extra_fonts }}
     - ${{ inputs.pre_compile }}
     - ${{ inputs.post_compile }}
     - ${{ inputs.latexmk_shell_escape }}
