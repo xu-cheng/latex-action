@@ -20,7 +20,7 @@ inputs:
   extra_system_packages:
     description: Install extra packages by apk
   extra_fonts:
-    description: Add extra fonts by fontconfig. It supports glob patterns.
+    description: Install extra .ttf/.otf fonts.
   pre_compile:
     description: Arbitrary bash codes to be executed before compiling LaTeX documents
   post_compile:
