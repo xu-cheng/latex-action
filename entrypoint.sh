@@ -184,7 +184,7 @@ else
 fi
 
 if [[ -n "$post_compile" ]]; then
-  if [[ -n "$work_in_corresponding_directories" ]] then
+  if [[ -n "$work_in_corresponding_directories" ]]; then
     info "Enter $real_working_directory"
     cd "$real_working_directory"
   fi
