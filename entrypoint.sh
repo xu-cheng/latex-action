@@ -64,8 +64,8 @@ if [[ -n "$work_in_corresponding_directories" ]]; then
   real_root_file_filename=()
   for file in "${root_file[@]}"; do
     real="$(realpath "$file")"
-    real_root_file_directory+="$(dirname "$real")"
-    real_root_file_filename+="$(basename "$real")"
+    real_root_file_directory+=("$(dirname "$real")")
+    real_root_file_filename+=("$(basename "$real")")
   done
 fi
 
