@@ -36,7 +36,7 @@ fi
 
 readarray -t root_file <<< "$root_file"
 
-if [[ -n "$working_directory"]]; then
+if [[ -n "$working_directory" ]]; then
   if [[ ! -d "$working_directory" ]]; then
     mkdir -p "$working_directory"
   fi
