@@ -31,6 +31,8 @@ inputs:
     description: Instruct latexmk to use LuaLaTeX
   latexmk_use_xelatex:
     description: Instruct latexmk to use XeLaTeX
+  work_in_corresponding_directories:
+    description: Use the directory where each root LaTex file is located as the working directory
 runs:
   using: docker
   image: Dockerfile
@@ -48,6 +50,7 @@ runs:
     - ${{ inputs.latexmk_shell_escape }}
     - ${{ inputs.latexmk_use_lualatex }}
     - ${{ inputs.latexmk_use_xelatex }}
+    - ${{ inputs.work_in_corresponding_directories }}
 branding:
   icon: book
   color: blue

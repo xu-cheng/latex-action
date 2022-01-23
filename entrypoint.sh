@@ -28,6 +28,7 @@ post_compile="${10}"
 latexmk_shell_escape="${11}"
 latexmk_use_lualatex="${12}"
 latexmk_use_xelatex="${13}"
+work_in_corresponding_directories=${14}
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -35,7 +36,7 @@ fi
 
 readarray -t root_file <<< "$root_file"
 
-if [[ -n "$working_directory" ]]; then
+if [[ -n "$working_directory" && -z "$work_in_corresponding_directories" ]]; then
   if [[ ! -d "$working_directory" ]]; then
     mkdir -p "$working_directory"
   fi
@@ -43,13 +44,23 @@ if [[ -n "$working_directory" ]]; then
 fi
 
 if [[ -n "$glob_root_file" ]]; then
-    expanded_root_file=()
-    for pattern in "${root_file[@]}"; do
-      expanded="$(compgen -G "$pattern" || echo "$pattern")"
-      readarray -t files <<< "$expanded"
-      expanded_root_file+=("${files[@]}")
-    done
-    root_file=("${expanded_root_file[@]}")
+  expanded_root_file=()
+  for pattern in "${root_file[@]}"; do
+    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    readarray -t files <<< "$expanded"
+    expanded_root_file+=("${files[@]}")
+  done
+  root_file=("${expanded_root_file[@]}")
+fi
+
+if [[ -n "$work_in_corresponding_directories" ]]; then
+  real_root_file_directory=()
+  real_root_file_filename=()
+  for file in "${root_file[@]}"; do
+    real="$(realpath "$file")"
+    real_root_file_directory+="$(dirname "$real")"
+    real_root_file_filename+="$(basename "$real")"
+  done
 fi
 
 if [[ -z "$compiler" && -z "$args" ]]; then
@@ -143,19 +154,31 @@ if [[ -n "$pre_compile" ]]; then
   eval "$pre_compile"
 fi
 
-for f in "${root_file[@]}"; do
-  if [[ -z "$f" ]]; then
-    continue
-  fi
+if [[ -z "work_in_corresponding_directories" ]]; then
+  for f in "${root_file[@]}"; do
+    if [[ -z "$f" ]]; then
+      continue
+    fi
 
-  info "Compile $f"
+    info "Compile $f"
 
-  if [[ ! -f "$f" ]]; then
-    error "File '$f' cannot be found from the directory '$PWD'."
-  fi
+    if [[ ! -f "$f" ]]; then
+      error "File '$f' cannot be found from the directory '$PWD'."
+    fi
 
-  "$compiler" "${args[@]}" "$f"
-done
+    "$compiler" "${args[@]}" "$f"
+  done
+else
+  for (( i = 0; i < ${#real_root_file_directory[*]}; ++i )); do
+    info "Enter ${real_root_file_directory[$i]}"
+    
+    cd "${real_root_file_directory[$i]}"
+
+    info "Compile ${real_root_file_filename[$i]}"
+
+    "$compiler" "${args[@]}" "${real_root_file_filename[$i]}"
+  done
+fi
 
 if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
