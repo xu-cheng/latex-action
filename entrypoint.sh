@@ -36,9 +36,15 @@ fi
 
 readarray -t root_file <<< "$root_file"
 
-if [[ -n "$working_directory" && -z "$work_in_corresponding_directories" ]]; then
+if [[ -n "$working_directory"]]; then
   if [[ ! -d "$working_directory" ]]; then
     mkdir -p "$working_directory"
+  fi
+  if [[ -n "$work_in_corresponding_directories" ]] then
+    real_working_directory="$(realpath "$working_directory")"
+    info "Enter $real_working_directory"
+  else
+    info "Enter $working_directory"
   fi
   cd "$working_directory"
 fi
@@ -169,18 +175,19 @@ if [[ -z "work_in_corresponding_directories" ]]; then
     "$compiler" "${args[@]}" "$f"
   done
 else
-  for (( i = 0; i < ${#real_root_file_directory[*]}; ++i )); do
+  for (( i=0; i<${#real_root_file_directory[*]}; ++i )); do
     info "Enter ${real_root_file_directory[$i]}"
-    
     cd "${real_root_file_directory[$i]}"
-
     info "Compile ${real_root_file_filename[$i]}"
-
     "$compiler" "${args[@]}" "${real_root_file_filename[$i]}"
   done
 fi
 
 if [[ -n "$post_compile" ]]; then
+  if [[ -n "$work_in_corresponding_directories" ]] then
+    info "Enter $real_working_directory"
+    cd "$real_working_directory"
+  fi
   info "Run post compile commands"
   eval "$post_compile"
 fi
