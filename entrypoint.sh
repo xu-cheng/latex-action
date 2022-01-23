@@ -40,7 +40,7 @@ if [[ -n "$working_directory"]]; then
   if [[ ! -d "$working_directory" ]]; then
     mkdir -p "$working_directory"
   fi
-  if [[ -n "$work_in_corresponding_directories" ]] then
+  if [[ -n "$work_in_corresponding_directories" ]]; then
     real_working_directory="$(realpath "$working_directory")"
     info "Enter $real_working_directory"
   else
