@@ -28,7 +28,7 @@ post_compile="${10}"
 latexmk_shell_escape="${11}"
 latexmk_use_lualatex="${12}"
 latexmk_use_xelatex="${13}"
-work_in_corresponding_directories=${14}
+work_in_corresponding_directories="${14}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
