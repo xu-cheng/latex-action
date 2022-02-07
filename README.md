@@ -37,6 +37,10 @@ Each input is provided as a key inside the `with` section of the action.
 
     The working directory for this action.
 
+* `work_in_root_file_dir`
+
+    Change directory into each root file's directory before compiling each documents. This will be helpful if you want to build multiple documents and have the compiler work in each of the corresponding directories.
+
 * `compiler`
 
     The LaTeX engine to be invoked. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used, which automates the process of generating LaTeX documents by issuing the appropriate sequence of commands to be run.

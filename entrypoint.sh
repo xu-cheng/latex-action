@@ -18,16 +18,17 @@ error() {
 root_file="${1}"
 glob_root_file="${2}"
 working_directory="${3}"
-compiler="${4}"
-args="${5}"
-extra_packages="${6}"
-extra_system_packages="${7}"
-extra_fonts="${8}"
-pre_compile="${9}"
-post_compile="${10}"
-latexmk_shell_escape="${11}"
-latexmk_use_lualatex="${12}"
-latexmk_use_xelatex="${13}"
+work_in_root_file_dir="${4}"
+compiler="${5}"
+args="${6}"
+extra_packages="${7}"
+extra_system_packages="${8}"
+extra_fonts="${9}"
+pre_compile="${10}"
+post_compile="${11}"
+latexmk_shell_escape="${12}"
+latexmk_use_lualatex="${13}"
+latexmk_use_xelatex="${14}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -148,14 +149,25 @@ for f in "${root_file[@]}"; do
     continue
   fi
 
-  info "Compile $f"
+  if [[ -n "$work_in_root_file_dir" ]]; then
+    pushd "$(dirname "$f")" >/dev/null
+    f="$(basename "$f")"
+    info "Compile $f in $PWD"
+  else
+    info "Compile $f"
+  fi
 
   if [[ ! -f "$f" ]]; then
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
   "$compiler" "${args[@]}" "$f"
+
+  if [[ -n "$work_in_root_file_dir" ]]; then
+    popd >/dev/null
+  fi
 done
+
 
 if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
