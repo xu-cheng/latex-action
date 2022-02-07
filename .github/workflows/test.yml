@@ -38,6 +38,13 @@ jobs:
           root_file: "glob_test*.tex"
           glob_root_file: true
           working_directory: test/
+      - name: Compile multiple LaTeX documents in different directories
+        uses: ./
+        with:
+          root_file: "subdir*/main.tex"
+          glob_root_file: true
+          working_directory: test/
+          work_in_root_file_dir: true
       - name: Compile LaTeX document with math symbols
         uses: ./
         with:
@@ -111,6 +118,8 @@ jobs:
           file test/file2.pdf | grep -q ' PDF '
           file test/glob_test1.pdf | grep -q ' PDF '
           file test/glob_test2.pdf | grep -q ' PDF '
+          file test/subdir1/main.pdf | grep -q ' PDF '
+          file test/subdir2/main.pdf | grep -q ' PDF '
           file test/math.pdf | grep -q ' PDF '
           file test/biblatex.pdf | grep -q ' PDF '
           file test/eps.pdf | grep -q ' PDF '
