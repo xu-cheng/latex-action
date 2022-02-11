@@ -154,7 +154,7 @@ for f in "${root_file[@]}"; do
     continue
   fi
 
-  if [[ -n "$multitask" && "jobs -r | wc -l" -ge "$cpu_count" ]]; then
+  if [[ -n "$multitask" && "$(jobs -r | wc -l)" -ge "$cpu_count" ]]; then
     wait -n
   fi
 
