@@ -45,6 +45,29 @@ jobs:
           glob_root_file: true
           working_directory: test/
           work_in_root_file_dir: true
+      - name: Compile multiple LaTeX documents without multitasking
+        uses: ./
+        with:
+          root_file: |
+            file1.tex
+            file2.tex
+            glob_test*.tex
+            subdir*/main.tex
+          glob_root_file: true
+          working_directory: test/
+          work_in_root_file_dir: true
+      - name: Compile multiple LaTeX documents with multitasking
+        uses: ./
+        with:
+          root_file: |
+            file1.tex
+            file2.tex
+            glob_test*.tex
+            subdir*/main.tex
+          glob_root_file: true
+          working_directory: test/
+          work_in_root_file_dir: true
+          multitask: true
       - name: Compile LaTeX document with math symbols
         uses: ./
         with:
