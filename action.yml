@@ -33,6 +33,8 @@ inputs:
     description: Instruct latexmk to use LuaLaTeX
   latexmk_use_xelatex:
     description: Instruct latexmk to use XeLaTeX
+  multitask:
+    description: Compile multiple latex files simultaneously according to the cpu core count
 runs:
   using: docker
   image: Dockerfile
@@ -51,6 +53,7 @@ runs:
     - ${{ inputs.latexmk_shell_escape }}
     - ${{ inputs.latexmk_use_lualatex }}
     - ${{ inputs.latexmk_use_xelatex }}
+    - ${{ inputs.multitask }}
 branding:
   icon: book
   color: blue

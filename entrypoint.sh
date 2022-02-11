@@ -29,6 +29,7 @@ post_compile="${11}"
 latexmk_shell_escape="${12}"
 latexmk_use_lualatex="${13}"
 latexmk_use_xelatex="${14}"
+multitask="${15}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -144,9 +145,17 @@ if [[ -n "$pre_compile" ]]; then
   eval "$pre_compile"
 fi
 
+if [[ -n "$multitask" ]]; then
+  cpu_count="$(nproc --all)"
+fi
+
 for f in "${root_file[@]}"; do
   if [[ -z "$f" ]]; then
     continue
+  fi
+
+  if [[ -n "$multitask" && "jobs -r | wc -l" -ge "$cpu_count" ]]; then
+    wait -n
   fi
 
   if [[ -n "$work_in_root_file_dir" ]]; then
@@ -161,13 +170,20 @@ for f in "${root_file[@]}"; do
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
-  "$compiler" "${args[@]}" "$f"
+  if [[ -n "$multitask" ]]; then
+    "$compiler" "${args[@]}" "$f" &
+  else
+    "$compiler" "${args[@]}" "$f"
+  fi
 
   if [[ -n "$work_in_root_file_dir" ]]; then
     popd >/dev/null
   fi
 done
 
+if [[ -n "$multitask" ]]; then
+  wait
+fi
 
 if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
