@@ -1,4 +1,4 @@
-name: Github Action for LaTeX
+name: GitHub Action for LaTeX
 description: GitHub Action to compile LaTeX documents
 author: Cheng XU
 inputs:

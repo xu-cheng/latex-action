@@ -1,6 +1,6 @@
 # latex-action
 
-[![GitHub Actions Status](https://github.com/xu-cheng/latex-action/workflows/Test%20Github%20Action/badge.svg)](https://github.com/xu-cheng/latex-action/actions)
+[![GitHub Actions Status](https://github.com/xu-cheng/latex-action/workflows/Test%20GitHub%20Action/badge.svg)](https://github.com/xu-cheng/latex-action/actions)
 
 GitHub Action to compile LaTeX documents.
 
@@ -151,8 +151,8 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 
   It will result in a `PDF.zip` being uploaded with `main.pdf` contained inside.
 
-* You can use [`@softprops/action-gh-release`](https://github.com/softprops/action-gh-release) to upload PDF file to the Github Release.
-* You can use normal shell tools such as `scp`/`git`/`rsync` to upload PDF file anywhere. For example, you can git push to the `gh-pages` branch in your repo, so you can view the document using Github Pages.
+* You can use [`@softprops/action-gh-release`](https://github.com/softprops/action-gh-release) to upload PDF file to the GitHub Release.
+* You can use normal shell tools such as `scp`/`git`/`rsync` to upload PDF file anywhere. For example, you can git push to the `gh-pages` branch in your repo, so you can view the document using GitHub Pages.
 
 ### How to add additional paths to the LaTeX input search path?
 

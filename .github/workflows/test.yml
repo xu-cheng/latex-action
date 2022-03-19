@@ -1,4 +1,4 @@
-name: Test Github Action
+name: Test GitHub Action
 on:
   push:
   pull_request:
@@ -86,7 +86,7 @@ jobs:
           compiler: arara
           args: "--verbose"
       # https://github.com/xu-cheng/latex-action/issues/16
-      - name: Test Action with Github Default Template
+      - name: Test Action with GitHub Default Template
         uses: ./
         with:
           # The root LaTeX file to be compiled
