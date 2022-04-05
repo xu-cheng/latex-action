@@ -44,6 +44,7 @@ if [[ -n "$working_directory" ]]; then
 fi
 
 if [[ -n "$glob_root_file" ]]; then
+  shopt -s extglob
   expanded_root_file=()
   for pattern in "${root_file[@]}"; do
     expanded="$(compgen -G "$pattern" || echo "$pattern")"
