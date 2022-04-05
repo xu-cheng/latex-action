@@ -125,7 +125,6 @@ jobs:
           file test/file2.pdf | grep -q ' PDF '
           file test/glob_test1.pdf | grep -q ' PDF '
           file test/glob_test2.pdf | grep -q ' PDF '
-          file test/glob_test2.pdf | grep -q ' PDF '
           file test/subdir1/main.pdf | grep -q ' PDF '
           file test/subdir2/main.pdf | grep -q ' PDF '
           file test/extglob/subdir1_glob/main.pdf | grep -q ' PDF '
