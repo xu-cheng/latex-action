@@ -76,15 +76,14 @@ jobs:
           latexmk_use_lualatex: true
       - name: Download extra fonts
         run: |
-          curl -L https://github.com/SorkinType/Fruktur/releases/download/v1.004/Fruktur.v1.004.zip -o Fruktur.zip
-          unzip Fruktur
+          curl -OL https://github.com/google/fonts/raw/main/ofl/notosans/NotoSans-Regular.ttf
       - name: Compile LaTeX document with extra_fonts
         uses: ./
         with:
           root_file: extra_fonts.tex
           working_directory: test/
           latexmk_use_xelatex: true
-          extra_fonts: "./../Fruktur-Regular.ttf"
+          extra_fonts: "./../NotoSans-Regular.ttf"
       - name: Compile LaTeX document with arara and graphviz
         uses: ./
         with:
