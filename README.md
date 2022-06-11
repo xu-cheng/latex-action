@@ -51,7 +51,7 @@ Each input is provided as a key inside the `with` section of the action.
 
 * `extra_system_packages`
 
-    The extra packages to be installed by [`apk`](https://pkgs.alpinelinux.org/packages) separated by space. For example, `extra_system_packages: "py-pygments"` will install the package `py-pygments` to be used by the `minted` for code highlights.
+    The extra packages to be installed by [`apk`](https://pkgs.alpinelinux.org/packages) separated by space. For example, `extra_system_packages: "inkscape"` will install the package `inkscape` to allow using SVG images in your LaTeX document.
 
 * `extra_fonts`
 
