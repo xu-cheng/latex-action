@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.makefile-tools"
+		]
+	},
+	"settings": {
+		"files.watcherExclude": {
+			"**/target": true
+		}
+	}
+}

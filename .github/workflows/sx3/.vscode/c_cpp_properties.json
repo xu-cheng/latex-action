@@ -1,0 +1,21 @@
+
+{
+	"configurations": [
+		{
+			"name": "Cortex-Builder",
+			"compilerPath": "",
+			"defines": [
+				"STM32F030x6"
+			],
+			"includePath": [
+				"c:\\Users\\israel\\AppData\\Roaming\\Code\\User\\globalStorage\\semyon-ivanov.cortex-builder\\Core",
+				"c:\\Users\\israel\\AppData\\Roaming\\Code\\User\\globalStorage\\semyon-ivanov.cortex-builder\\Include\\stm32f030x6",
+				"c:\\Users\\israel\\Documents\\GitHub\\latex-action\\.github\\workflows\\sx3\\user"
+			],
+			"cStandard": "c11",
+			"cppStandard": "c++17",
+			"intelliSenseMode": "${default}"
+		}
+	],
+	"version": 4
+}

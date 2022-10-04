@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"**/.vscode": false,
+		"**/JLink": true,
+		"**/.git*": true,
+		"**/*.code-workspace": false,
+		"**/cortexbuilder.json": true
+	}
+}

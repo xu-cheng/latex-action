@@ -1,0 +1,83 @@
+{
+	"configurations": [
+		{
+			"name": "Attach to running iOS on device",
+			"type": "cordova",
+			"request": "attach",
+			"platform": "ios",
+			"target": "device",
+			"port": 9220,
+			"sourceMaps": true,
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Cargo test",
+			"cargo": {
+				"args": [
+					"test",
+					"--no-run",
+					"--lib"
+				]
+			},
+			"program": "${cargo:program}",
+			"args": [1]
+		},
+		{
+			"name": "Launch Chrome",
+			"request": "launch",
+			"type": "chrome",
+			"url": "http://localhost:8080",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
+			"name": "(gdb) Anexar",
+			"type": "cppdbg",
+			"request": "attach",
+			"program": "insira o nome do programa, por exemplo ${workspaceFolder}/a.exe",,
+			"MIMode": "gdb",
+			"miDebuggerPath": "/path/to/gdb",
+			"setupCommands": [
+				{
+					"description": "Habilitar a reformatação automática para gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"description":  "Definir Tipo de Desmontagem como Intel",
+					"text": "-gdb-set disassembly-flavor intel",
+					"ignoreFailures": true
+				}
+			]
+		},
+		{
+			"name": "(Windows) Iniciar",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "insira o nome do programa, por exemplo ${workspaceFolder}/a.exe",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"console": "externalTerminal"
+		},
+		{
+			"name": "ARM-Debug",
+			"cwd": "${workspaceRoot}",
+			"executable": "${workspaceRoot}\\output\\sx3.elf",
+			"svdFile": "c:\\Users\\israel\\AppData\\Roaming\\Code\\User\\globalStorage\\semyon-ivanov.cortex-builder\\SVD\\STM32F030\\STM32F030.svd",
+			"request": "launch",
+			"type": "cortex-debug",
+			"servertype": "jlink",
+			"device": "cortex-m0",
+			"interface": "swd",
+			"runToMain": true,
+			"configFiles": [
+				"",
+				""
+			]
+		}
+	],
+	"version": "0.2.0"
+}

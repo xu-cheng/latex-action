@@ -1,0 +1,129 @@
+2022.09.15 02:06:42 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\israel\Documents\GitHub\latex-action\.github\workflows\sx3\.metals\lsp.trace.json or C:\Users\israel\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2022.09.15 02:06:45 INFO  logging to file C:\Users\israel\Documents\GitHub\latex-action\.github\workflows\sx3\.metals\metals.log
+2022.09.15 02:06:45 INFO  Started: Metals version 0.11.8 in workspace 'C:\Users\israel\Documents\GitHub\latex-action\.github\workflows\sx3' for client Visual Studio Code 1.71.1.
+2022.09.15 02:06:45 WARN  Can't instantiate JavaInteractiveSemanticdb (version: JdkVersion(8), jdkHome: C:\Program Files (x86)\Java\jre1.8.0_251, javac exists: false)
+2022.09.15 02:06:46 WARN  Flyway upgrade recommended: H2 2.1.214 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.1.210.
+2022.09.15 02:06:46 INFO  time: initialize in 1.52s
+2022.09.15 02:06:47 WARN  Build server is not auto-connectable.
+2022.09.15 02:06:47 WARN  no build tool detected in workspace 'C:\Users\israel\Documents\GitHub\latex-action\.github\workflows\sx3'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+set 15, 2022 2:15:20 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:15:58 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:16:01 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:28 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+set 15, 2022 2:17:29 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMA합ES: Unsupported notification method: $/setTrace
+2022.09.15 02:29:56 INFO  shutting down Metals

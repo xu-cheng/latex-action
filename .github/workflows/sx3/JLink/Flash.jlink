@@ -1,0 +1,6 @@
+r
+loadbin output/sx3.bin, 0x00
+verifybin output/sx3.bin, 0x00
+r
+g
+q

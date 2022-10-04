@@ -1,0 +1,134 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"type": "shell",
+			"command": "make -s -j 10 all",
+			"options": {
+				"cwd": "${workspaceRoot}",
+				"shell": {
+					"executable": "cmd.exe",
+					"args": [
+						"/C"
+					]
+				}
+			},
+			"presentation": {
+				"clear": true
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Clean",
+			"type": "shell",
+			"command": "make -s clean",
+			"options": {
+				"cwd": "${workspaceRoot}",
+				"shell": {
+					"executable": "cmd.exe",
+					"args": [
+						"/C"
+					]
+				}
+			},
+			"presentation": {
+				"clear": true
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Write",
+			"type": "shell",
+			"command": "JLink -Device STM32F030C6 -If SWD -Speed 1000 JLink/Flash.jlink",
+			"options": {
+				"cwd": "${workspaceRoot}",
+				"shell": {
+					"executable": "cmd.exe",
+					"args": [
+						"/C"
+					]
+				}
+			},
+			"presentation": {
+				"clear": true
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Erase",
+			"type": "shell",
+			"command": "JLink -Device STM32F030C6 -If SWD -Speed 1000 JLink/Erase.jlink",
+			"options": {
+				"cwd": "${workspaceRoot}",
+				"shell": {
+					"executable": "cmd.exe",
+					"args": [
+						"/C"
+					]
+				}
+			},
+			"presentation": {
+				"clear": true
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Reset",
+			"type": "shell",
+			"command": "JLink -Device STM32F030C6 -If SWD -Speed 1000 JLink/Reset.jlink",
+			"options": {
+				"cwd": "${workspaceRoot}",
+				"shell": {
+					"executable": "cmd.exe",
+					"args": [
+						"/C"
+					]
+				}
+			},
+			"presentation": {
+				"clear": true
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "dbg",
+			"type": "process",
+			"command": "${command:workbench.action.debug.start}"
+		},
+		{
+			"label": "Debag",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Build",
+				"Write",
+				"dbg"
+			],
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		}
+	]
+}
