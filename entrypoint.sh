@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
-
-shopt -s extglob
+set -eo pipefail
+shopt -s extglob globstar nullglob
 
 info() {
   echo -e "\033[1;34m$1\033[0m"
@@ -48,7 +47,8 @@ fi
 if [[ -n "$glob_root_file" ]]; then
   expanded_root_file=()
   for pattern in "${root_file[@]}"; do
-    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    # shellcheck disable=SC2086
+    IFS= expanded="$(ls $pattern)"
     readarray -t files <<< "$expanded"
     expanded_root_file+=("${files[@]}")
   done
@@ -117,7 +117,8 @@ if [[ -n "$extra_fonts" ]]; then
   readarray -t extra_fonts <<< "$extra_fonts"
   expanded_extra_fonts=()
   for pattern in "${extra_fonts[@]}"; do
-    expanded="$(compgen -G "$pattern" || echo "$pattern")"
+    # shellcheck disable=SC2086
+    IFS= expanded="$(ls $pattern)"
     readarray -t files <<< "$expanded"
     expanded_extra_fonts+=("${files[@]}")
   done
