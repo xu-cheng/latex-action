@@ -98,6 +98,12 @@ jobs:
           working_directory: test/
           compiler: arara
           args: "--verbose"
+      - name: Compile LaTeX document with errors using continue_on_error
+        uses: ./
+        with:
+          root_file: error.tex
+          working_directory: test/
+          continue_on_error: true
       # https://github.com/xu-cheng/latex-action/issues/16
       - name: Test Action with Github Default Template
         uses: ./
@@ -109,7 +115,7 @@ jobs:
           # The LaTeX engine to be invoked
           compiler: # optional, default is latexmk
           # Extra arguments to be passed to the LaTeX engine
-          args: # optional, default is -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          args: # optional, default is -pdf -file-line-error -interaction=nonstopmode
           # [Deprecated] Install extra packages by tlmgr
           extra_packages: # optional
           # Install extra packages by apk
@@ -118,6 +124,8 @@ jobs:
           pre_compile: # optional
           # Arbitrary bash codes to be executed after compiling LaTeX documents
           post_compile: # optional
+          # Ignore LaTeX build errors
+          continue_on_error: # optional, default false
           # Instruct latexmk to enable --shell-escape
           latexmk_shell_escape: # optional
           # Instruct latexmk to use LuaLaTeX

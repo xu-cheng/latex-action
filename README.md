@@ -47,7 +47,7 @@ Each input is provided as a key inside the `with` section of the action.
 
 * `args`
 
-    The extra arguments to be passed to the LaTeX engine. By default, it is `-pdf -file-line-error -halt-on-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
+    The extra arguments to be passed to the LaTeX engine. By default, it is `-pdf -file-line-error -interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 * `extra_system_packages`
 
@@ -72,6 +72,10 @@ Each input is provided as a key inside the `with` section of the action.
 * `post_compile`
 
     Arbitrary bash codes to be executed after compiling LaTeX documents. For example, `post_compile: "latexmk -c"` to clean up temporary files.
+
+* `continue_on_error`
+
+    Ignore LaTeX build errors, not set by default.
 
 **The following inputs are only valid if the input `compiler` is not changed.**
 

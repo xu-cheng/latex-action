@@ -27,9 +27,10 @@ extra_system_packages="${8}"
 extra_fonts="${9}"
 pre_compile="${10}"
 post_compile="${11}"
-latexmk_shell_escape="${12}"
-latexmk_use_lualatex="${13}"
-latexmk_use_xelatex="${14}"
+continue_on_error="${12}"
+latexmk_shell_escape="${13}"
+latexmk_use_lualatex="${14}"
+latexmk_use_xelatex="${15}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -58,7 +59,7 @@ fi
 if [[ -z "$compiler" && -z "$args" ]]; then
   warn "Input 'compiler' and 'args' are both empty. Reset them to default values."
   compiler="latexmk"
-  args="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
+  args="-pdf -file-line-error -interaction=nonstopmode"
 fi
 
 IFS=' ' read -r -a args <<< "$args"
@@ -66,6 +67,10 @@ IFS=' ' read -r -a args <<< "$args"
 if [[ "$compiler" = "latexmk" ]]; then
   if [[ -n "$latexmk_shell_escape" ]]; then
     args+=("-shell-escape")
+  fi
+
+  if [[ -z "$continue_on_error" ]]; then
+    args+=("-halt-on-error")
   fi
 
   if [[ -n "$latexmk_use_lualatex" && -n "$latexmk_use_xelatex" ]]; then
@@ -147,6 +152,10 @@ if [[ -n "$pre_compile" ]]; then
   eval "$pre_compile"
 fi
 
+if [[ -n "$continue_on_error" ]]; then
+  set +e
+fi
+
 for f in "${root_file[@]}"; do
   if [[ -z "$f" ]]; then
     continue
@@ -170,7 +179,6 @@ for f in "${root_file[@]}"; do
     popd >/dev/null
   fi
 done
-
 
 if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
