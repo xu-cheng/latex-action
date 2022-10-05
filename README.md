@@ -102,6 +102,10 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
+      - uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: main.pdf
 ```
 
 ## FAQs
