@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Compile basic LaTeX document
         uses: ./
         with:
@@ -146,7 +146,7 @@ jobs:
           file test/graphviz.pdf | grep -q ' PDF '
           file test/abc.pdf | grep -q ' PDF '
       - name: Upload
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3
         with:
           name: test
           path: test

@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
@@ -143,7 +143,7 @@ The PDF file will be in the same folder as that of the LaTeX source in the CI en
 * You can use [`@actions/upload-artifact`](https://github.com/actions/upload-artifact) to upload a zip containing the PDF file to the workflow tab. For example you can add
 
   ```yaml
-  - uses: actions/upload-artifact@v2
+  - uses: actions/upload-artifact@v3
     with:
       name: PDF
       path: main.pdf
