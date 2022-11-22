@@ -41,6 +41,10 @@ Each input is provided as a key inside the `with` section of the action.
 
     Change directory into each root file's directory before compiling each documents. This will be helpful if you want to build multiple documents and have the compiler work in each of the corresponding directories.
 
+* `continue_on_error`
+
+    Continuing to build document even with LaTeX build errors. This will be helpful if you want to build multiple documents regardless of any build error. Noted that even with this input set, this action will always report failure upon any build error. If you want to prevent the GitHub action job also from failure, please refer to [the upstream document](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepscontinue-on-error).
+
 * `compiler`
 
     The LaTeX engine to be invoked. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used, which automates the process of generating LaTeX documents by issuing the appropriate sequence of commands to be run.

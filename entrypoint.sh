@@ -20,16 +20,17 @@ root_file="${1}"
 glob_root_file="${2}"
 working_directory="${3}"
 work_in_root_file_dir="${4}"
-compiler="${5}"
-args="${6}"
-extra_packages="${7}"
-extra_system_packages="${8}"
-extra_fonts="${9}"
-pre_compile="${10}"
-post_compile="${11}"
-latexmk_shell_escape="${12}"
-latexmk_use_lualatex="${13}"
-latexmk_use_xelatex="${14}"
+continue_on_error="${5}"
+compiler="${6}"
+args="${7}"
+extra_packages="${8}"
+extra_system_packages="${9}"
+extra_fonts="${10}"
+pre_compile="${11}"
+post_compile="${12}"
+latexmk_shell_escape="${13}"
+latexmk_use_lualatex="${14}"
+latexmk_use_xelatex="${15}"
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
@@ -147,6 +148,8 @@ if [[ -n "$pre_compile" ]]; then
   eval "$pre_compile"
 fi
 
+exit_code=0
+
 for f in "${root_file[@]}"; do
   if [[ -z "$f" ]]; then
     continue
@@ -164,7 +167,14 @@ for f in "${root_file[@]}"; do
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
-  "$compiler" "${args[@]}" "$f"
+  "$compiler" "${args[@]}" "$f" || ret="$?"
+  if [[ "$ret" -ne 0 ]]; then
+    if [[ -n "$continue_on_error" ]]; then
+      exit_code="$ret"
+    else
+      exit "$ret"
+    fi
+  fi
 
   if [[ -n "$work_in_root_file_dir" ]]; then
     popd >/dev/null
@@ -176,3 +186,5 @@ if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
   eval "$post_compile"
 fi
+
+exit "$exit_code"
