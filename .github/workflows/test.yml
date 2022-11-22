@@ -98,6 +98,15 @@ jobs:
           working_directory: test/
           compiler: arara
           args: "--verbose"
+      - name: Compile LaTeX document with continue_on_error
+        uses: ./
+        with:
+          root_file: |
+            error.tex
+            not_error.tex
+          working_directory: test/
+          continue_on_error: true
+        continue-on-error: true
       # https://github.com/xu-cheng/latex-action/issues/16
       - name: Test Action with Github Default Template
         uses: ./
@@ -145,6 +154,7 @@ jobs:
           file test/extra_fonts.pdf | grep -q ' PDF '
           file test/graphviz.pdf | grep -q ' PDF '
           file test/abc.pdf | grep -q ' PDF '
+          file test/not_error.pdf | grep -q ' PDF '
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
