@@ -107,32 +107,6 @@ jobs:
           working_directory: test/
           continue_on_error: true
         continue-on-error: true
-      # https://github.com/xu-cheng/latex-action/issues/16
-      - name: Test Action with Github Default Template
-        uses: ./
-        with:
-          # The root LaTeX file to be compiled
-          root_file: test/test.tex
-          # The working directory for the LaTeX engine
-          working_directory: # optional
-          # The LaTeX engine to be invoked
-          compiler: # optional, default is latexmk
-          # Extra arguments to be passed to the LaTeX engine
-          args: # optional, default is -pdf -file-line-error -halt-on-error -interaction=nonstopmode
-          # [Deprecated] Install extra packages by tlmgr
-          extra_packages: # optional
-          # Install extra packages by apk
-          extra_system_packages: # optional
-          # Arbitrary bash codes to be executed before compiling LaTeX documents
-          pre_compile: # optional
-          # Arbitrary bash codes to be executed after compiling LaTeX documents
-          post_compile: # optional
-          # Instruct latexmk to enable --shell-escape
-          latexmk_shell_escape: # optional
-          # Instruct latexmk to use LuaLaTeX
-          latexmk_use_lualatex: # optional
-          # Instruct latexmk to use XeLaTeX
-          latexmk_use_xelatex: # optional
       - name: Check pdf files
         run: |
           file test/test.pdf | grep -q ' PDF '
