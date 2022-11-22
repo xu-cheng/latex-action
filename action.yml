@@ -10,7 +10,9 @@ inputs:
   working_directory:
     description: The working directory for this action
   work_in_root_file_dir:
-    description: Change directory into each root file's directory before compiling each documents.
+    description: Change directory into each root file's directory before compiling each documents
+  continue_on_error:
+     description: Continuing to build document even with LaTeX build errors
   compiler:
     description: The LaTeX engine to be invoked
     default: latexmk
@@ -41,6 +43,7 @@ runs:
     - ${{ inputs.glob_root_file }}
     - ${{ inputs.working_directory }}
     - ${{ inputs.work_in_root_file_dir }}
+    - ${{ inputs.continue_on_error }}
     - ${{ inputs.compiler }}
     - ${{ inputs.args }}
     - ${{ inputs.extra_packages }}
