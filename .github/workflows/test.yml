@@ -107,6 +107,13 @@ jobs:
           working_directory: test/
           continue_on_error: true
         continue-on-error: true
+      - name: Compile LaTeX document with Chinese characters
+        uses: ./
+        with:
+          latexmk_use_xelatex: true
+          root_file: |
+            chinese.tex
+          working_directory: test/
       - name: Check pdf files
         run: |
           file test/test.pdf | grep -q ' PDF '
@@ -129,6 +136,7 @@ jobs:
           file test/graphviz.pdf | grep -q ' PDF '
           file test/abc.pdf | grep -q ' PDF '
           file test/not_error.pdf | grep -q ' PDF '
+          file test/chinese.pdf | grep -q ' PDF '
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
