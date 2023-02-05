@@ -108,6 +108,7 @@ else
 fi
 
 if [[ -n "$extra_system_packages" ]]; then
+  IFS=$' \t\n'
   for pkg in $extra_system_packages; do
     info "Install $pkg by apk"
     apk --no-cache add "$pkg"
