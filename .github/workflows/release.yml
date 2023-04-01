@@ -31,4 +31,4 @@ jobs:
           git checkout -b "${TAG_VERSION}"
           git add Dockerfile
           git commit -m "Release ${TAG_VERSION}"
-          git push -f
+          git push -f --set-upstream origin "${TAG_VERSION}"
