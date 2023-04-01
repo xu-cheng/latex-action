@@ -1,0 +1,34 @@
+name: release
+on: 
+  push:
+    tags:
+      - v**
+jobs:
+  release_pinned_version:
+    strategy:
+      matrix:
+        pinned_version:
+          # support last three old versions
+          - name: "texlive2022"
+            docker_version: "20230301"
+          - name: "texlive2021"
+            docker_version: "20220301"
+          - name: "texlive2020"
+            docker_version: "20210301"
+    name: "release pinned version [${{ pinned_version.name }}]"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+      - name: Configure Git
+        run: |
+          git config --global user.name "Cheng XU"
+          git config --global user.email "git@xuc.me"
+      - name: Create pinned version
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/}-${{ pinned_version.name }}"
+          sed -i 's|texlive-full:latest|texlive-full:${{ pinned_version.docker_version }}|g' 'Dockerfile'
+          git checkout -b "${TAG_VERSION}"
+          git add Dockerfile
+          git commit -m "Release ${TAG_VERSION}"
+          git push -f
