@@ -183,6 +183,17 @@ Noted that you should NOT use `{{ github.workspace }}` or `$GITHUB_WORKSPACE` in
 
 You can find more information of `TEXINPUTS` [here](https://tex.stackexchange.com/a/93733).
 
+### How to use old versions of TeXLive?
+
+By default, this action always uses the latest docker image that contains the latest TeXLive updates. If you want to use old versions of TeXLive, you can change the action version tag accordingly. Currently, three last old versions of TeXLive are supported. 
+
+```yaml
+- uses: xu-cheng/latex-action@v2             # TeXLive 2023
+- uses: xu-cheng/latex-action@v2-texlive2022 # TeXLive 2022
+- uses: xu-cheng/latex-action@v2-texlive2021 # TeXLive 2021
+- uses: xu-cheng/latex-action@v2-texlive2020 # TeXLive 2020
+```
+
 ### It fails due to `xindy` cannot be found.
 
 This is an upstream issue where `xindy.x86_64-linuxmusl` is currently missing in TeXLive. To work around it, try [this](https://github.com/xu-cheng/latex-action/issues/32#issuecomment-626086551).
