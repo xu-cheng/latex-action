@@ -15,7 +15,7 @@ jobs:
             docker_version: "20220301"
           - name: "texlive2020"
             docker_version: "20210301"
-    name: "release pinned version [${{ pinned_version.name }}]"
+    name: "release pinned version [${{ matrix.pinned_version.name }}]"
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
@@ -26,8 +26,8 @@ jobs:
           git config --global user.email "git@xuc.me"
       - name: Create pinned version
         run: |
-          TAG_VERSION="${GITHUB_REF#refs/tags/}-${{ pinned_version.name }}"
-          sed -i 's|texlive-full:latest|texlive-full:${{ pinned_version.docker_version }}|g' 'Dockerfile'
+          TAG_VERSION="${GITHUB_REF#refs/tags/}-${{ matrix.pinned_version.name }}"
+          sed -i 's|texlive-full:latest|texlive-full:${{ matrix.pinned_version.docker_version }}|g' 'Dockerfile'
           git checkout -b "${TAG_VERSION}"
           git add Dockerfile
           git commit -m "Release ${TAG_VERSION}"
