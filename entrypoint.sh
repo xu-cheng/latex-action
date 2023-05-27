@@ -32,6 +32,13 @@ latexmk_shell_escape="${13}"
 latexmk_use_lualatex="${14}"
 latexmk_use_xelatex="${15}"
 
+# install git on old images
+if ! command -v git &> /dev/null
+then
+  apk --no-cache add git
+fi
+git config --system --add safe.directory /github/workspace
+
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
