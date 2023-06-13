@@ -33,8 +33,7 @@ latexmk_use_lualatex="${14}"
 latexmk_use_xelatex="${15}"
 
 # install git on old images
-if ! command -v git &> /dev/null
-then
+if ! command -v git &>/dev/null; then
   apk --no-cache add git
 fi
 git config --system --add safe.directory /github/workspace
@@ -43,7 +42,7 @@ if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
 
-readarray -t root_file <<< "$root_file"
+readarray -t root_file <<<"$root_file"
 
 if [[ -n "$working_directory" ]]; then
   if [[ ! -d "$working_directory" ]]; then
@@ -57,7 +56,7 @@ if [[ -n "$glob_root_file" ]]; then
   for pattern in "${root_file[@]}"; do
     # shellcheck disable=SC2086
     IFS= expanded="$(echo $pattern)"
-    readarray -t files <<< "$expanded"
+    readarray -t files <<<"$expanded"
     expanded_root_file+=("${files[@]}")
   done
   root_file=("${expanded_root_file[@]}")
@@ -69,7 +68,7 @@ if [[ -z "$compiler" && -z "$args" ]]; then
   args="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
 fi
 
-IFS=' ' read -r -a args <<< "$args"
+IFS=' ' read -r -a args <<<"$args"
 
 if [[ "$compiler" = "latexmk" ]]; then
   if [[ -n "$latexmk_shell_escape" ]]; then
@@ -123,12 +122,12 @@ if [[ -n "$extra_system_packages" ]]; then
 fi
 
 if [[ -n "$extra_fonts" ]]; then
-  readarray -t extra_fonts <<< "$extra_fonts"
+  readarray -t extra_fonts <<<"$extra_fonts"
   expanded_extra_fonts=()
   for pattern in "${extra_fonts[@]}"; do
     # shellcheck disable=SC2086
     IFS= expanded="$(echo $pattern)"
-    readarray -t files <<< "$expanded"
+    readarray -t files <<<"$expanded"
     expanded_extra_fonts+=("${files[@]}")
   done
   extra_fonts=("${expanded_extra_fonts[@]}")
@@ -188,7 +187,6 @@ for f in "${root_file[@]}"; do
     popd >/dev/null
   fi
 done
-
 
 if [[ -n "$post_compile" ]]; then
   info "Run post compile commands"
