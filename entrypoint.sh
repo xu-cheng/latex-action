@@ -54,10 +54,9 @@ fi
 if [[ -n "$glob_root_file" ]]; then
   expanded_root_file=()
   for pattern in "${root_file[@]}"; do
-    # shellcheck disable=SC2086
-    IFS= expanded="$(echo $pattern)"
-    readarray -t files <<<"$expanded"
-    expanded_root_file+=("${files[@]}")
+    # shellcheck disable=SC2206
+    expanded=( $pattern )
+    expanded_root_file+=("${expanded[@]}")
   done
   root_file=("${expanded_root_file[@]}")
 fi
@@ -125,10 +124,9 @@ if [[ -n "$extra_fonts" ]]; then
   readarray -t extra_fonts <<<"$extra_fonts"
   expanded_extra_fonts=()
   for pattern in "${extra_fonts[@]}"; do
-    # shellcheck disable=SC2086
-    IFS= expanded="$(echo $pattern)"
-    readarray -t files <<<"$expanded"
-    expanded_extra_fonts+=("${files[@]}")
+    # shellcheck disable=SC2206
+    expanded=( $pattern )
+    expanded_extra_fonts+=("${expanded[@]}")
   done
   extra_fonts=("${expanded_extra_fonts[@]}")
 
