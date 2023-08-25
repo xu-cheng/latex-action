@@ -38,6 +38,10 @@ if ! command -v git &>/dev/null; then
 fi
 git config --system --add safe.directory /github/workspace
 
+# fix arara permission on some images
+arara_path=$(realpath "$(command -v arara)")
+[[ ! -x "$arara_path" ]] && chmod +x "$arara_path"
+
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
