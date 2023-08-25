@@ -83,14 +83,14 @@ jobs:
           latexmk_use_lualatex: true
       - name: Download extra fonts
         run: |
-          curl -OL https://github.com/google/fonts/raw/main/ofl/notosans/NotoSans-Regular.ttf
+          curl -OL https://github.com/silnrsi/font-doulos/raw/78bd59af3dd78e8276918471d8a228348bf741e8/references/v6200/DoulosSIL-Regular.ttf
       - name: Compile LaTeX document with extra_fonts
         uses: ./
         with:
           root_file: extra_fonts.tex
           working_directory: test/
           latexmk_use_xelatex: true
-          extra_fonts: "./../NotoSans-Regular.ttf"
+          extra_fonts: "./../DoulosSIL-Regular.ttf"
       - name: Compile LaTeX document with arara and graphviz
         uses: ./
         with:
