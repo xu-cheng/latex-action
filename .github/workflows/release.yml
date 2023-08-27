@@ -1,5 +1,5 @@
 name: release
-on: 
+on:
   push:
     tags:
       - v**
@@ -12,7 +12,7 @@ jobs:
           - name: "texlive2022"
             docker_version: "20230301"
           - name: "texlive2021"
-            docker_version: "20220301"
+            docker_version: "20220201"
           - name: "texlive2020"
             docker_version: "20210301"
     name: "release pinned version [${{ matrix.pinned_version.name }}]"
