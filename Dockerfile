@@ -1,4 +1,4 @@
-FROM ghcr.io/xu-cheng/texlive-full:20220301
+FROM ghcr.io/xu-cheng/texlive-full:20220201
 
 COPY \
   LICENSE \
