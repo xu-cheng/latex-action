@@ -99,7 +99,7 @@ run docker run --rm \
   -v "$GITHUB_STEP_SUMMARY:$GITHUB_STEP_SUMMARY" \
   -v "$GITHUB_PATH:$GITHUB_PATH" \
   -v "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" \
-  -v "$GITHUB_ACTION_PATH/entryoint.sh":/entrypoint.sh \
+  -v "$GITHUB_ACTION_PATH/entrypoint.sh":/entrypoint.sh \
   -w "$GITHUB_WORKSPACE" \
   --entrypoint "/entrypoint.sh" \
   "$docker_image" \
