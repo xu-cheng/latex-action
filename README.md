@@ -16,7 +16,7 @@ Each input is provided as a key inside the `with` section of the action.
 
     The root LaTeX file to be compiled. This input is required. You can also pass multiple files as a multi-line string to compile multiple documents. For example:
     ```yaml
-    - uses: xu-cheng/latex-action@v2
+    - uses: xu-cheng/latex-action@v3
       with:
         root_file: |
           file1.tex
@@ -27,7 +27,7 @@ Each input is provided as a key inside the `with` section of the action.
 
     If set, interpret the `root_file` input as bash glob pattern. For example:
     ```yaml
-    - uses: xu-cheng/latex-action@v2
+    - uses: xu-cheng/latex-action@v3
       with:
         root_file: "*.tex"
         glob_root_file: true
@@ -61,7 +61,7 @@ Each input is provided as a key inside the `with` section of the action.
 
     Install extra `.ttf`/`.otf` fonts to be used by `fontspec`. You can also pass multiple files as a multi-line string. Each file path will be interpreted as glob pattern. For example:
     ```yaml
-    - uses: xu-cheng/latex-action@v2
+    - uses: xu-cheng/latex-action@v3
       with:
         root_file: main.tex
         extra_fonts: |
@@ -76,6 +76,26 @@ Each input is provided as a key inside the `with` section of the action.
 * `post_compile`
 
     Arbitrary bash codes to be executed after compiling LaTeX documents. For example, `post_compile: "latexmk -c"` to clean up temporary files.
+
+* `texlive_version`
+
+    The version of TeXLive to be used. Supported inputs include 2020, 2021, 2022, 2023, and latest. By default the latest TeXLive is used. This input cannot co-exist with `docker_image` input. An  example to use this input:
+    ```yaml
+    - uses: xu-cheng/latex-action@v3
+      with:
+        root_file: main.tex
+        texlive_version: 2022
+    ```
+
+* `docker_image`
+
+    Custom which docker image to be used. Only [latex-docker images](https://github.com/xu-cheng/latex-docker/pkgs/container/texlive-full) are supported. For example if you want to pin the docker image:
+    ```yaml
+    - uses: xu-cheng/latex-action@v3
+      with:
+        root_file: main.tex
+        docker_image: ghcr.io/xu-cheng/texlive-full:20230801
+    ```
 
 **The following inputs are only valid if the input `compiler` is not changed.**
 
@@ -103,7 +123,7 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
       - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
       - name: Upload PDF file
@@ -120,14 +140,14 @@ jobs:
 By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, you can set the `latexmk_use_xelatex` or `latexmk_use_lualatex` input respectively. For example:
 
 ```yaml
-- uses: xu-cheng/latex-action@v2
+- uses: xu-cheng/latex-action@v3
   with:
     root_file: main.tex
     latexmk_use_xelatex: true
 ```
 
 ```yaml
-- uses: xu-cheng/latex-action@v2
+- uses: xu-cheng/latex-action@v3
   with:
     root_file: main.tex
     latexmk_use_lualatex: true
@@ -140,7 +160,7 @@ Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` doc
 To enable `--shell-escape`, set the `latexmk_shell_escape` input.
 
 ```yaml
-- uses: xu-cheng/latex-action@v2
+- uses: xu-cheng/latex-action@v3
   with:
     root_file: main.tex
     latexmk_shell_escape: true
@@ -172,7 +192,7 @@ Sometimes you may have custom package (`.sty`) or class (`.cls`) files in other 
   run: |
     curl -OL https://example.com/custom_template.zip
     unzip custom_template.zip
-- uses: xu-cheng/latex-action@v2
+- uses: xu-cheng/latex-action@v3
   with:
     root_file: main.tex
   env:
@@ -182,17 +202,6 @@ Sometimes you may have custom package (`.sty`) or class (`.cls`) files in other 
 Noted that you should NOT use `{{ github.workspace }}` or `$GITHUB_WORKSPACE` in `TEXINPUTS`. This action works in a separated docker container, where the workspace directory is mounted into it. Therefore, the workspace directory inside the docker container is different from `github.workspace`.
 
 You can find more information of `TEXINPUTS` [here](https://tex.stackexchange.com/a/93733).
-
-### How to use old versions of TeXLive?
-
-By default, this action always uses the latest docker image that contains the latest TeXLive updates. If you want to use old versions of TeXLive, you can change the action version tag accordingly. Currently, three last old versions of TeXLive are supported. 
-
-```yaml
-- uses: xu-cheng/latex-action@v2             # TeXLive 2023
-- uses: xu-cheng/latex-action@v2-texlive2022 # TeXLive 2022
-- uses: xu-cheng/latex-action@v2-texlive2021 # TeXLive 2021
-- uses: xu-cheng/latex-action@v2-texlive2020 # TeXLive 2020
-```
 
 ### It fails due to `xindy` cannot be found.
 
