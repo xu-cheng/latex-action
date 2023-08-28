@@ -68,7 +68,6 @@ IFS=' ' read -r -a args <<<"$args"
 
 if [[ "$compiler" = "latexmk" ]]; then
   if [[ "$latexmk_shell_escape" = "true" ]]; then
-    info "Option latexmk_shell_escape is enabled."
     args+=("-shell-escape")
   fi
 
@@ -77,7 +76,6 @@ if [[ "$compiler" = "latexmk" ]]; then
   fi
 
   if [[ "$latexmk_use_lualatex" = "true" ]]; then
-    info "Option latexmk_use_lualatex is enabled."
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
         unset 'args[i]'
@@ -96,7 +94,6 @@ if [[ "$compiler" = "latexmk" ]]; then
   fi
 
   if [[ "$latexmk_use_xelatex" = "true" ]]; then
-    info "Option latexmk_use_xelatex is enabled."
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
         unset 'args[i]'
@@ -161,7 +158,6 @@ for f in "${root_file[@]}"; do
   fi
 
   if [[ "$work_in_root_file_dir" = "true" ]]; then
-    info "Option work_in_root_file_dir is enabled."
     pushd "$(dirname "$f")" >/dev/null
     f="$(basename "$f")"
     info "Compile $f in $PWD"
@@ -176,7 +172,6 @@ for f in "${root_file[@]}"; do
   "$compiler" "${args[@]}" "$f" || ret="$?"
   if [[ "$ret" -ne 0 ]]; then
     if [[ "$continue_on_error" = "true" ]]; then
-      info "Option continue_on_error is enabled."
       exit_code="$ret"
     else
       exit "$ret"
