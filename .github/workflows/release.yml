@@ -2,7 +2,7 @@ name: release
 on:
   push:
     tags:
-      - v**
+      - v2
 jobs:
   release_pinned_version:
     strategy:
