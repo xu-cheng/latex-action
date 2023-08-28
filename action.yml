@@ -13,8 +13,10 @@ inputs:
     description: The working directory for this action
   work_in_root_file_dir:
     description: Change directory into each root file's directory before compiling each documents
+    default: "false"
   continue_on_error:
     description: Continuing to build document even with LaTeX build errors
+    default: "false"
   compiler:
     description: The LaTeX engine to be invoked
     default: latexmk
@@ -31,10 +33,13 @@ inputs:
     description: Arbitrary bash codes to be executed after compiling LaTeX documents
   latexmk_shell_escape:
     description: Instruct latexmk to enable --shell-escape
+    default: "false"
   latexmk_use_lualatex:
     description: Instruct latexmk to use LuaLaTeX
+    default: "false"
   latexmk_use_xelatex:
     description: Instruct latexmk to use XeLaTeX
+    default: "false"
 
 runs:
   using: composite
