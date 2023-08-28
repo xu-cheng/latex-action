@@ -31,12 +31,18 @@ post_compile="${12}"
 latexmk_shell_escape="${13}"
 latexmk_use_lualatex="${14}"
 latexmk_use_xelatex="${15}"
+env_texinputs="${16}"
 
 # install git on old images
 if ! command -v git &>/dev/null; then
   apk --no-cache add git
 fi
 git config --system --add safe.directory /github/workspace
+
+# setup user-defined environment variables
+if [[ -n "$env_texinputs" ]]; then
+  export TEXINPUTS="$env_texinputs"
+fi
 
 if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
