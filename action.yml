@@ -9,8 +9,6 @@ inputs:
   root_file:
     description: The root LaTeX file to be compiled
     required: true
-  glob_root_file:
-    description: Interpret the root_file input as bash glob pattern
   working_directory:
     description: The working directory for this action
   work_in_root_file_dir:
@@ -49,7 +47,6 @@ runs:
           "${{ inputs.texlive_version }}" \
           "${{ inputs.docker_image }}" \
           "${{ inputs.root_file }}" \
-          "${{ inputs.glob_root_file }}" \
           "${{ inputs.working_directory }}" \
           "${{ inputs.work_in_root_file_dir }}" \
           "${{ inputs.continue_on_error }}" \

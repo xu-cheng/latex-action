@@ -14,23 +14,13 @@ Each input is provided as a key inside the `with` section of the action.
 
 * `root_file`
 
-    The root LaTeX file to be compiled. This input is required. You can also pass multiple files as a multi-line string to compile multiple documents. For example:
+    The root LaTeX file to be compiled. This input is required. You can also pass multiple files as a multi-line string to compile multiple documents. Each file path will be interpreted as bash glob pattern. For example:
     ```yaml
     - uses: xu-cheng/latex-action@v3
       with:
         root_file: |
           file1.tex
           file2.tex
-    ```
-
-* `glob_root_file`
-
-    If set, interpret the `root_file` input as bash glob pattern. For example:
-    ```yaml
-    - uses: xu-cheng/latex-action@v3
-      with:
-        root_file: "*.tex"
-        glob_root_file: true
     ```
 
 * `working_directory`
@@ -59,7 +49,7 @@ Each input is provided as a key inside the `with` section of the action.
 
 * `extra_fonts`
 
-    Install extra `.ttf`/`.otf` fonts to be used by `fontspec`. You can also pass multiple files as a multi-line string. Each file path will be interpreted as glob pattern. For example:
+    Install extra `.ttf`/`.otf` fonts to be used by `fontspec`. You can also pass multiple files as a multi-line string. Each file path will be interpreted as bash glob pattern. For example:
     ```yaml
     - uses: xu-cheng/latex-action@v3
       with:
