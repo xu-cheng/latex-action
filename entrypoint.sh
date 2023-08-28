@@ -22,14 +22,13 @@ work_in_root_file_dir="${3}"
 continue_on_error="${4}"
 compiler="${5}"
 args="${6}"
-extra_packages="${7}"
-extra_system_packages="${8}"
-extra_fonts="${9}"
-pre_compile="${10}"
-post_compile="${11}"
-latexmk_shell_escape="${12}"
-latexmk_use_lualatex="${13}"
-latexmk_use_xelatex="${14}"
+extra_system_packages="${7}"
+extra_fonts="${8}"
+pre_compile="${9}"
+post_compile="${10}"
+latexmk_shell_escape="${11}"
+latexmk_use_lualatex="${12}"
+latexmk_use_xelatex="${13}"
 
 # install git on old images
 if ! command -v git &>/dev/null; then
@@ -53,7 +52,7 @@ fi
 expanded_root_file=()
 for pattern in "${root_file[@]}"; do
   # shellcheck disable=SC2206
-  expanded=( $pattern )
+  expanded=($pattern)
   expanded_root_file+=("${expanded[@]}")
 done
 root_file=("${expanded_root_file[@]}")
@@ -122,7 +121,7 @@ if [[ -n "$extra_fonts" ]]; then
   expanded_extra_fonts=()
   for pattern in "${extra_fonts[@]}"; do
     # shellcheck disable=SC2206
-    expanded=( $pattern )
+    expanded=($pattern)
     expanded_extra_fonts+=("${expanded[@]}")
   done
   extra_fonts=("${expanded_extra_fonts[@]}")
@@ -139,10 +138,6 @@ if [[ -n "$extra_fonts" ]]; then
   done
 
   fc-cache -fv
-fi
-
-if [[ -n "$extra_packages" ]]; then
-  warn "Input 'extra_packages' is deprecated. We now build LaTeX document with full TeXLive installed."
 fi
 
 if [[ -n "$pre_compile" ]]; then

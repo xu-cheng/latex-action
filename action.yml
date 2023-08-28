@@ -21,8 +21,6 @@ inputs:
   args:
     description: Extra arguments to be passed to the LaTeX engine
     default: "-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
-  extra_packages:
-    description: "[Deprecated] Install extra packages by tlmgr"
   extra_system_packages:
     description: Install extra packages by apk
   extra_fonts:
@@ -52,7 +50,6 @@ runs:
           "${{ inputs.continue_on_error }}" \
           "${{ inputs.compiler }}" \
           "${{ inputs.args }}" \
-          "${{ inputs.extra_packages }}" \
           "${{ inputs.extra_system_packages }}" \
           "${{ inputs.extra_fonts }}" \
           "${{ inputs.pre_compile }}" \
