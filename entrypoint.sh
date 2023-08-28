@@ -67,15 +67,17 @@ fi
 IFS=' ' read -r -a args <<<"$args"
 
 if [[ "$compiler" = "latexmk" ]]; then
-  if [[ -n "$latexmk_shell_escape" ]]; then
+  if [[ "$latexmk_shell_escape" = "true" ]]; then
+    info "Option latexmk_shell_escape is enabled."
     args+=("-shell-escape")
   fi
 
-  if [[ -n "$latexmk_use_lualatex" && -n "$latexmk_use_xelatex" ]]; then
+  if [[ "$latexmk_use_lualatex" = "true" && "$latexmk_use_xelatex" = "true" ]]; then
     error "Input 'latexmk_use_lualatex' and 'latexmk_use_xelatex' cannot be used at the same time."
   fi
 
-  if [[ -n "$latexmk_use_lualatex" ]]; then
+  if [[ "$latexmk_use_lualatex" = "true" ]]; then
+    info "Option latexmk_use_lualatex is enabled."
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
         unset 'args[i]'
@@ -93,7 +95,8 @@ if [[ "$compiler" = "latexmk" ]]; then
     args=("${args[@]/#-interaction=/--interaction=}")
   fi
 
-  if [[ -n "$latexmk_use_xelatex" ]]; then
+  if [[ "$latexmk_use_xelatex" = "true" ]]; then
+    info "Option latexmk_use_xelatex is enabled."
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
         unset 'args[i]'
@@ -103,7 +106,7 @@ if [[ "$compiler" = "latexmk" ]]; then
   fi
 else
   for VAR in "${!latexmk_@}"; do
-    if [[ -n "${!VAR}" ]]; then
+    if [[ "${!VAR}" = "true" ]]; then
       error "Input '${VAR}' is only valid if input 'compiler' is set to 'latexmk'."
     fi
   done
@@ -157,7 +160,8 @@ for f in "${root_file[@]}"; do
     continue
   fi
 
-  if [[ -n "$work_in_root_file_dir" ]]; then
+  if [[ "$work_in_root_file_dir" = "true" ]]; then
+    info "Option work_in_root_file_dir is enabled."
     pushd "$(dirname "$f")" >/dev/null
     f="$(basename "$f")"
     info "Compile $f in $PWD"
@@ -171,14 +175,15 @@ for f in "${root_file[@]}"; do
 
   "$compiler" "${args[@]}" "$f" || ret="$?"
   if [[ "$ret" -ne 0 ]]; then
-    if [[ -n "$continue_on_error" ]]; then
+    if [[ "$continue_on_error" = "true" ]]; then
+      info "Option continue_on_error is enabled."
       exit_code="$ret"
     else
       exit "$ret"
     fi
   fi
 
-  if [[ -n "$work_in_root_file_dir" ]]; then
+  if [[ "$work_in_root_file_dir" = "true" ]]; then
     popd >/dev/null
   fi
 done
