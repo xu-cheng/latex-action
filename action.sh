@@ -2,6 +2,11 @@
 
 set -eo pipefail
 
+run() {
+  echo -e "\033[1;34m$@\033[0m"
+  "$@"
+}
+
 error() {
   echo "::error :: $1"
   exit 1
@@ -36,7 +41,7 @@ if [[ -z "$docker_image" ]]; then
   docker_image="ghcr.io/xu-cheng/texlive-full:$image_version"
 fi
 
-docker run --rm \
+run docker run --rm \
   -e "TEXINPUTS" \
   -e "HOME" \
   -e "GITHUB_JOB" \
