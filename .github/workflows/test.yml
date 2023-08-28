@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
 jobs:
   test:
+    strategy:
+      fail-fast: false
+      matrix:
+        texlive_version: [2020, 2021, 2022, latest]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
@@ -14,11 +18,13 @@ jobs:
       - name: Compile basic LaTeX document
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: test.tex
           working_directory: test/
       - name: Compile LaTeX document with pre/post compile actions
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: test.tex
           working_directory: test/
           pre_compile: |
@@ -28,6 +34,7 @@ jobs:
       - name: Compile multiple LaTeX documents
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: |
             file1.tex
             file2.tex
@@ -35,12 +42,14 @@ jobs:
       - name: Compile multiple LaTeX documents using glob
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: "glob_test*.tex"
           glob_root_file: true
           working_directory: test/
       - name: Compile multiple LaTeX documents in different directories
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: "subdir*/main.tex"
           glob_root_file: true
           working_directory: test/
@@ -48,6 +57,7 @@ jobs:
       - name: Compile multiple LaTeX documents in different directories using extended glob
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: "extglob/!(subdir3)_glob/*.tex"
           glob_root_file: true
           working_directory: test/
@@ -55,6 +65,7 @@ jobs:
       - name: Compile multiple LaTeX documents in different directories using glob star
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: "globstar/**/*.tex"
           glob_root_file: true
           working_directory: test/
@@ -62,21 +73,25 @@ jobs:
       - name: Compile LaTeX document with math symbols
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: math.tex
           working_directory: test/
       - name: Compile LaTeX document with biblatex/biber
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: biblatex.tex
           working_directory: test/
       - name: Compile LaTeX document with eps figure
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: eps.tex
           working_directory: test/
       - name: Compile LaTeX document with minted and lualatex
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: minted.tex
           working_directory: test/
           latexmk_shell_escape: true
@@ -87,6 +102,7 @@ jobs:
       - name: Compile LaTeX document with extra_fonts
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: extra_fonts.tex
           working_directory: test/
           latexmk_use_xelatex: true
@@ -94,6 +110,7 @@ jobs:
       - name: Compile LaTeX document with arara and graphviz
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: graphviz.tex
           working_directory: test/
           compiler: arara
@@ -101,6 +118,7 @@ jobs:
       - name: Compile LaTeX document with continue_on_error
         uses: ./
         with:
+          texlive_version: ${{ matrix.texlive_version }}
           root_file: |
             error.tex
             not_error.tex
