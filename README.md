@@ -189,8 +189,6 @@ Sometimes you may have custom package (`.sty`) or class (`.cls`) files in other 
     TEXINPUTS: ".:./custom_template//:"
 ```
 
-Noted that you should NOT use `{{ github.workspace }}` or `$GITHUB_WORKSPACE` in `TEXINPUTS`. This action works in a separated docker container, where the workspace directory is mounted into it. Therefore, the workspace directory inside the docker container is different from `github.workspace`.
-
 You can find more information of `TEXINPUTS` [here](https://tex.stackexchange.com/a/93733).
 
 ### It fails due to `xindy` cannot be found.
