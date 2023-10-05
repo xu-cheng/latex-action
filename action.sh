@@ -41,8 +41,13 @@ if [[ -z "$docker_image" ]]; then
   docker_image="ghcr.io/xu-cheng/texlive-full:$image_version"
 fi
 
+# ref: https://docs.miktex.org/manual/envvars.html
 run docker run --rm \
+  -e "BIBINPUTS" \
+  -e "BSTINPUTS" \
+  -e "MFINPUTS" \
   -e "TEXINPUTS" \
+  -e "TFMFONTS" \
   -e "HOME" \
   -e "GITHUB_JOB" \
   -e "GITHUB_REF" \
