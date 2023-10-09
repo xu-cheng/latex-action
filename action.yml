@@ -46,22 +46,23 @@ runs:
   steps:
     - shell: bash
       run: |
-        "${GITHUB_ACTION_PATH}/action.sh" \
-          "${{ inputs.texlive_version }}" \
-          "${{ inputs.docker_image }}" \
-          "${{ inputs.root_file }}" \
-          "${{ inputs.working_directory }}" \
-          "${{ inputs.work_in_root_file_dir }}" \
-          "${{ inputs.continue_on_error }}" \
-          "${{ inputs.compiler }}" \
-          "${{ inputs.args }}" \
-          "${{ inputs.extra_system_packages }}" \
-          "${{ inputs.extra_fonts }}" \
-          "${{ inputs.pre_compile }}" \
-          "${{ inputs.post_compile }}" \
-          "${{ inputs.latexmk_shell_escape }}" \
-          "${{ inputs.latexmk_use_lualatex }}" \
-          "${{ inputs.latexmk_use_xelatex }}"
+        "${GITHUB_ACTION_PATH}/action.sh"
+      env:
+        INPUT_TEXLIVE_VERSION: ${{ inputs.texlive_version }}
+        INPUT_DOCKER_IMAGE: ${{ inputs.docker_image }}
+        INPUT_ROOT_FILE: ${{ inputs.root_file }}
+        INPUT_WORKING_DIRECTORY: ${{ inputs.working_directory }}
+        INPUT_WORK_IN_ROOT_FILE_DIR: ${{ inputs.work_in_root_file_dir }}
+        INPUT_CONTINUE_ON_ERROR: ${{ inputs.continue_on_error }}
+        INPUT_COMPILER: ${{ inputs.compiler }}
+        INPUT_ARGS: ${{ inputs.args }}
+        INPUT_EXTRA_SYSTEM_PACKAGES: ${{ inputs.extra_system_packages }}
+        INPUT_EXTRA_FONTS: ${{ inputs.extra_fonts }}
+        INPUT_PRE_COMPILE: ${{ inputs.pre_compile }}
+        INPUT_POST_COMPILE: ${{ inputs.post_compile }}
+        INPUT_LATEXMK_SHELL_ESCAPE: ${{ inputs.latexmk_shell_escape }}
+        INPUT_LATEXMK_USE_LUALATEX: ${{ inputs.latexmk_use_lualatex }}
+        INPUT_LATEXMK_USE_XELATEX: ${{ inputs.latexmk_use_xelatex }}
 
 branding:
   icon: book

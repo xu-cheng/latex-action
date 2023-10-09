@@ -16,20 +16,6 @@ error() {
   exit 1
 }
 
-root_file="${1}"
-working_directory="${2}"
-work_in_root_file_dir="${3}"
-continue_on_error="${4}"
-compiler="${5}"
-args="${6}"
-extra_system_packages="${7}"
-extra_fonts="${8}"
-pre_compile="${9}"
-post_compile="${10}"
-latexmk_shell_escape="${11}"
-latexmk_use_lualatex="${12}"
-latexmk_use_xelatex="${13}"
-
 # install git on old images
 if ! command -v git &>/dev/null; then
   apk --no-cache add git
@@ -40,13 +26,13 @@ if [[ -z "$root_file" ]]; then
   error "Input 'root_file' is missing."
 fi
 
-readarray -t root_file <<<"$root_file"
+readarray -t root_file <<<"$INPUT_ROOT_FILE"
 
-if [[ -n "$working_directory" ]]; then
-  if [[ ! -d "$working_directory" ]]; then
-    mkdir -p "$working_directory"
+if [[ -n "$INPUT_WORKING_DIRECTORY" ]]; then
+  if [[ ! -d "$INPUT_WORKING_DIRECTORY" ]]; then
+    mkdir -p "$INPUT_WORKING_DIRECTORY"
   fi
-  cd "$working_directory"
+  cd "$INPUT_WORKING_DIRECTORY"
 fi
 
 expanded_root_file=()
@@ -57,24 +43,24 @@ for pattern in "${root_file[@]}"; do
 done
 root_file=("${expanded_root_file[@]}")
 
-if [[ -z "$compiler" && -z "$args" ]]; then
+if [[ -z "$INPUT_COMPILER" && -z "$INPUT_ARGS" ]]; then
   warn "Input 'compiler' and 'args' are both empty. Reset them to default values."
-  compiler="latexmk"
-  args="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
+  INPUT_COMPILER="latexmk"
+  INPUT_ARGS="-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
 fi
 
-IFS=' ' read -r -a args <<<"$args"
+IFS=' ' read -r -a args <<<"$INPUT_ARGS"
 
-if [[ "$compiler" = "latexmk" ]]; then
-  if [[ "$latexmk_shell_escape" = "true" ]]; then
+if [[ "$INPUT_COMPILER" = "latexmk" ]]; then
+  if [[ "$INPUT_LATEXMK_SHELL_ESCAPE" = "true" ]]; then
     args+=("-shell-escape")
   fi
 
-  if [[ "$latexmk_use_lualatex" = "true" && "$latexmk_use_xelatex" = "true" ]]; then
+  if [[ "$INPUT_LATEXMK_USE_LUALATEX" = "true" && "$INPUT_LATEXMK_USE_XELATEX" = "true" ]]; then
     error "Input 'latexmk_use_lualatex' and 'latexmk_use_xelatex' cannot be used at the same time."
   fi
 
-  if [[ "$latexmk_use_lualatex" = "true" ]]; then
+  if [[ "$INPUT_LATEXMK_USE_LUALATEX" = "true" ]]; then
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
         unset 'args[i]'
@@ -92,7 +78,7 @@ if [[ "$compiler" = "latexmk" ]]; then
     args=("${args[@]/#-interaction=/--interaction=}")
   fi
 
-  if [[ "$latexmk_use_xelatex" = "true" ]]; then
+  if [[ "$INPUT_LATEXMK_USE_XELATEX" = "true" ]]; then
     for i in "${!args[@]}"; do
       if [[ "${args[i]}" = "-pdf" ]]; then
         unset 'args[i]'
@@ -101,23 +87,23 @@ if [[ "$compiler" = "latexmk" ]]; then
     args+=("-xelatex")
   fi
 else
-  for VAR in "${!latexmk_@}"; do
+  for VAR in "${!INPUT_LATEXMK_@}"; do
     if [[ "${!VAR}" = "true" ]]; then
       error "Input '${VAR}' is only valid if input 'compiler' is set to 'latexmk'."
     fi
   done
 fi
 
-if [[ -n "$extra_system_packages" ]]; then
+if [[ -n "$INPUT_EXTRA_SYSTEM_PACKAGES" ]]; then
   IFS=$' \t\n'
-  for pkg in $extra_system_packages; do
+  for pkg in $INPUT_EXTRA_SYSTEM_PACKAGES; do
     info "Install $pkg by apk"
     apk --no-cache add "$pkg"
   done
 fi
 
-if [[ -n "$extra_fonts" ]]; then
-  readarray -t extra_fonts <<<"$extra_fonts"
+if [[ -n "$INPUT_EXTRA_FONTS" ]]; then
+  readarray -t extra_fonts <<<"$INPUT_EXTRA_FONTS"
   expanded_extra_fonts=()
   for pattern in "${extra_fonts[@]}"; do
     # shellcheck disable=SC2206
@@ -140,9 +126,9 @@ if [[ -n "$extra_fonts" ]]; then
   fc-cache -fv
 fi
 
-if [[ -n "$pre_compile" ]]; then
+if [[ -n "$INPUT_PRE_COMPILE" ]]; then
   info "Run pre compile commands"
-  eval "$pre_compile"
+  eval "$INPUT_PRE_COMPILE"
 fi
 
 exit_code=0
@@ -152,7 +138,7 @@ for f in "${root_file[@]}"; do
     continue
   fi
 
-  if [[ "$work_in_root_file_dir" = "true" ]]; then
+  if [[ "$INPUT_WORK_IN_ROOT_FILE_DIR" = "true" ]]; then
     pushd "$(dirname "$f")" >/dev/null
     f="$(basename "$f")"
     info "Compile $f in $PWD"
@@ -164,23 +150,23 @@ for f in "${root_file[@]}"; do
     error "File '$f' cannot be found from the directory '$PWD'."
   fi
 
-  "$compiler" "${args[@]}" "$f" || ret="$?"
+  "$INPUT_COMPILER" "${args[@]}" "$f" || ret="$?"
   if [[ "$ret" -ne 0 ]]; then
-    if [[ "$continue_on_error" = "true" ]]; then
+    if [[ "$INPUT_CONTINUE_ON_ERROR" = "true" ]]; then
       exit_code="$ret"
     else
       exit "$ret"
     fi
   fi
 
-  if [[ "$work_in_root_file_dir" = "true" ]]; then
+  if [[ "$INPUT_WORK_IN_ROOT_FILE_DIR" = "true" ]]; then
     popd >/dev/null
   fi
 done
 
-if [[ -n "$post_compile" ]]; then
+if [[ -n "$INPUT_POST_COMPILE" ]]; then
   info "Run post compile commands"
-  eval "$post_compile"
+  eval "$INPUT_POST_COMPILE"
 fi
 
 exit "$exit_code"

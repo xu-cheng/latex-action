@@ -2,8 +2,16 @@
 
 set -eo pipefail
 
+random_token() {
+  tr -dc A-Za-z0-9 </dev/urandom 2>/dev/null | head -c 32
+  echo ""
+}
+
 run() {
-  echo -e "\033[1;34m$@\033[0m"
+  token="$(random_token)"
+  echo "::stop-commands::${token}"
+  echo -e "\033[1;34m${*@Q}\033[0m"
+  echo "::${token}::"
   "$@"
 }
 
@@ -12,16 +20,12 @@ error() {
   exit 1
 }
 
-texlive_version="${1}"
-docker_image="${2}"
-shift 2
-
-if [[ -n "$texlive_version" && -n "$docker_image" ]]; then
+if [[ -n "$INPUT_TEXLIVE_VERSION" && -n "$INPUT_DOCKER_IMAGE" ]]; then
   error "Input 'texlive_version' and 'docker_image' cannot co-exist".
 fi
 
-if [[ -z "$docker_image" ]]; then
-  case "$texlive_version" in
+if [[ -z "$INPUT_DOCKER_IMAGE" ]]; then
+  case "$INPUT_TEXLIVE_VERSION" in
   "" | "latest" | "2023")
     image_version="latest"
     ;;
@@ -35,10 +39,10 @@ if [[ -z "$docker_image" ]]; then
     image_version="20210301"
     ;;
   *)
-    error "TeX Live version $texlive_version is not supported. The currently supported versions are 2020-2023 or latest."
+    error "TeX Live version $INPUT_TEXLIVE_VERSION is not supported. The currently supported versions are 2020-2023 or latest."
     ;;
   esac
-  docker_image="ghcr.io/xu-cheng/texlive-full:$image_version"
+  INPUT_DOCKER_IMAGE="ghcr.io/xu-cheng/texlive-full:$image_version"
 fi
 
 # ref: https://docs.miktex.org/manual/envvars.html
@@ -49,6 +53,19 @@ run docker run --rm \
   -e "TEXINPUTS" \
   -e "TFMFONTS" \
   -e "HOME" \
+  -e "INPUT_ROOT_FILE" \
+  -e "INPUT_WORKING_DIRECTORY" \
+  -e "INPUT_WORK_IN_ROOT_FILE_DIR" \
+  -e "INPUT_CONTINUE_ON_ERROR" \
+  -e "INPUT_COMPILER" \
+  -e "INPUT_ARGS" \
+  -e "INPUT_EXTRA_SYSTEM_PACKAGES" \
+  -e "INPUT_EXTRA_FONTS" \
+  -e "INPUT_PRE_COMPILE" \
+  -e "INPUT_POST_COMPILE" \
+  -e "INPUT_LATEXMK_SHELL_ESCAPE" \
+  -e "INPUT_LATEXMK_USE_LUALATEX" \
+  -e "INPUT_LATEXMK_USE_XELATEX" \
   -e "GITHUB_JOB" \
   -e "GITHUB_REF" \
   -e "GITHUB_SHA" \
@@ -107,5 +124,4 @@ run docker run --rm \
   -v "$GITHUB_ACTION_PATH/entrypoint.sh":/entrypoint.sh \
   -w "$GITHUB_WORKSPACE" \
   --entrypoint "/entrypoint.sh" \
-  "$docker_image" \
-  "$@"
+  "$INPUT_DOCKER_IMAGE"
