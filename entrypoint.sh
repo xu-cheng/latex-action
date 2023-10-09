@@ -22,7 +22,7 @@ if ! command -v git &>/dev/null; then
 fi
 git config --system --add safe.directory "$GITHUB_WORKSPACE"
 
-if [[ -z "$root_file" ]]; then
+if [[ -z "$INPUT_ROOT_FILE" ]]; then
   error "Input 'root_file' is missing."
 fi
 
