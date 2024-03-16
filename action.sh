@@ -24,10 +24,14 @@ if [[ -n "$INPUT_TEXLIVE_VERSION" && -n "$INPUT_DOCKER_IMAGE" ]]; then
   error "Input 'texlive_version' and 'docker_image' cannot co-exist".
 fi
 
+export INPUT_TLMGR_REPO=""
+
 if [[ -z "$INPUT_DOCKER_IMAGE" ]]; then
+  INPUT_TLMGR_REPO="$INPUT_TEXLIVE_VERSION"
   case "$INPUT_TEXLIVE_VERSION" in
   "" | "latest" | "2024")
     image_version="latest"
+    INPUT_TLMGR_REPO="latest"
     ;;
   "2023")
     image_version="20240301"
@@ -69,6 +73,7 @@ run docker run --rm \
   -e "INPUT_LATEXMK_SHELL_ESCAPE" \
   -e "INPUT_LATEXMK_USE_LUALATEX" \
   -e "INPUT_LATEXMK_USE_XELATEX" \
+  -e "INPUT_TLMGR_REPO" \
   -e "GITHUB_JOB" \
   -e "GITHUB_REF" \
   -e "GITHUB_SHA" \

@@ -126,6 +126,12 @@ if [[ -n "$INPUT_EXTRA_FONTS" ]]; then
   fc-cache -fv
 fi
 
+if [[ -n "$INPUT_TLMGR_REPO" && "$INPUT_TLMGR_REPO" != latest ]]; then
+  tlmgr_repo_url="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$INPUT_TLMGR_REPO/tlnet-final"
+  info "Set tlmgr repo to $tlmgr_repo_url"
+  tlmgr option repository "$tlmgr_repo_url"
+fi
+
 if [[ -n "$INPUT_PRE_COMPILE" ]]; then
   info "Run pre compile commands"
   eval "$INPUT_PRE_COMPILE"
