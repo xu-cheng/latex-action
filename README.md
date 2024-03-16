@@ -69,7 +69,7 @@ Each input is provided as a key inside the `with` section of the action.
 
 * `texlive_version`
 
-    The version of TeXLive to be used. Supported inputs include 2020, 2021, 2022, 2023, and latest. By default the latest TeXLive is used. This input cannot co-exist with `docker_image` input. An  example to use this input:
+    The version of TeXLive to be used. Supported inputs include 2020, 2021, 2022, 2023, 2024, and latest. By default the latest TeXLive is used. This input cannot co-exist with `docker_image` input. An  example to use this input:
     ```yaml
     - uses: xu-cheng/latex-action@v3
       with:

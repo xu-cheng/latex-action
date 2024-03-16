@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        texlive_version: [2020, 2021, 2022, latest]
+        texlive_version: [2022, 2023, latest]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
