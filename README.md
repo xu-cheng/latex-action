@@ -123,6 +123,40 @@ jobs:
           path: main.pdf
 ```
 
+### Build PDF with SVG Support
+
+**Note:** Due to the permission problem, if you're running self-hosted runner change the post_compile command to `post_compile: "latexmk -c && chown 1000:1000 -R *"` to correct permission. Here the `1000:1000` corresponds to the UID & GID of the user running the runner.
+
+``` yaml
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          #pre_compile: "latexmk -C"
+          root_file: main.tex
+          latexmk_use_xelatex: true
+          latexmk_shell_escape: true
+          texlive_version: 2023
+          extra_system_packages: "inkscape"
+          continue_on_error: true
+          args: "-pdf -file-line-error -interaction=nonstopmode"
+          post_compile: "latexmk -c"
+
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: main.pdf
+```
+
 ## FAQs
 
 ### How to use XeLaTeX or LuaLaTeX instead of pdfLaTeX?
