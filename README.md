@@ -125,7 +125,9 @@ jobs:
 
 ### Build PDF with SVG Support
 
-**Note:** Due to the permission problem, if you're running self-hosted runner change the post_compile command to `post_compile: "latexmk -c && chown 1000:1000 -R *"` to correct permission. Here the `1000:1000` corresponds to the UID & GID of the user running the runner.
+**Note:** Due to the permission problem described in issue https://github.com/xu-cheng/latex-action/issues/147, 
+if you're running **self-hosted** runner, change the post_compile command to `post_compile: "latexmk -c && chown 1000:1000 -R *"` 
+to correct permission. Here the `1000:1000` corresponds to the UID & GID of the user running the runner.
 
 ``` yaml
 name: Build LaTeX document
