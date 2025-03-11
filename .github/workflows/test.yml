@@ -21,6 +21,12 @@ jobs:
           texlive_version: ${{ matrix.texlive_version }}
           root_file: test.tex
           working_directory: test/
+      - name: Compile LaTeX document with space in filename
+        uses: ./
+        with:
+          texlive_version: ${{ matrix.texlive_version }}
+          root_file: space test.tex
+          working_directory: test/
       - name: Compile LaTeX document with pre/post compile actions
         uses: ./
         with:
