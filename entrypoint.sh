@@ -38,7 +38,7 @@ fi
 expanded_root_file=()
 for pattern in "${root_file[@]}"; do
   # shellcheck disable=SC2206
-  expanded=($pattern)
+  IFS="" expanded=($pattern)
   expanded_root_file+=("${expanded[@]}")
 done
 root_file=("${expanded_root_file[@]}")
