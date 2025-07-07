@@ -11,7 +11,7 @@ A GitHub Action that compiles LaTeX documents to PDF using a complete TeXLive en
 
 - 🐳 **Containerized**: Run in a [Docker container](https://github.com/xu-cheng/latex-docker/) with a full [TeXLive](https://www.tug.org/texlive/) installation.
 - 📅 **TeXLive version flexibility**: Support both the latest and historic versions of TeXLive.
-- 🐧 **Multi-platform**: Support both Alpine and Debian-based Docker images.
+- 🐧 **Multi-platform**: Support both [Alpine](https://alpinelinux.org) and [Debian](https://www.debian.org/)-based Docker images.
 - 📁 **Multi-document support**: Compile multiple LaTeX files in a single workflow.
 - 🔧 **Flexible compilation**: Support various LaTeX engines (pdfLaTeX, XeLaTeX, LuaLaTeX).
 - 🎨 **Custom fonts**: Install additional fonts.
@@ -44,7 +44,7 @@ Configure the action by providing these inputs in the `with` section:
   - uses: xu-cheng/latex-action@v4
     with:
       root_file: main.tex
-      texlive_version: 2022
+      texlive_version: 2024
   ```
 
 - **`os`**
