@@ -1,6 +1,6 @@
 # latex-action
 
-[![GitHub Actions Status](https://github.com/xu-cheng/latex-action/workflows/Test%20Github%20Action/badge.svg)](https://github.com/xu-cheng/latex-action/actions)
+[![GitHub Actions Status](https://github.com/xu-cheng/latex-action/workflows/test/badge.svg)](https://github.com/xu-cheng/latex-action/actions)
 
 A GitHub Action that compiles LaTeX documents to PDF using a complete TeXLive environment.
 

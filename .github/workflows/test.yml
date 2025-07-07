@@ -1,4 +1,4 @@
-name: Test Github Action
+name: test
 on:
   push:
   pull_request:
@@ -10,7 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        texlive_version: [2022, 2023, latest]
+        texlive_version: [2024, latest]
+        os: [alpine, debian]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
@@ -19,12 +20,14 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: test.tex
           working_directory: test/
       - name: Compile LaTeX document with pre/post compile actions
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: test.tex
           working_directory: test/
           pre_compile: |
@@ -35,6 +38,7 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: |
             file1.tex
             file2.tex
@@ -43,12 +47,14 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: "glob_test*.tex"
           working_directory: test/
       - name: Compile multiple LaTeX documents in different directories
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: "subdir*/main.tex"
           working_directory: test/
           work_in_root_file_dir: true
@@ -56,6 +62,7 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: "extglob/!(subdir3)_glob/*.tex"
           working_directory: test/
           work_in_root_file_dir: true
@@ -63,6 +70,7 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: "globstar/**/*.tex"
           working_directory: test/
           work_in_root_file_dir: true
@@ -70,24 +78,28 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: math.tex
           working_directory: test/
       - name: Compile LaTeX document with biblatex/biber
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: biblatex.tex
           working_directory: test/
       - name: Compile LaTeX document with eps figure
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: eps.tex
           working_directory: test/
       - name: Compile LaTeX document with minted and lualatex
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: minted.tex
           working_directory: test/
           latexmk_shell_escape: true
@@ -99,6 +111,7 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: extra_fonts.tex
           working_directory: test/
           latexmk_use_xelatex: true
@@ -107,6 +120,7 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: graphviz.tex
           working_directory: test/
           compiler: arara
@@ -115,6 +129,7 @@ jobs:
         uses: ./
         with:
           texlive_version: ${{ matrix.texlive_version }}
+          os: ${{ matrix.os }}
           root_file: |
             error.tex
             not_error.tex
@@ -146,6 +161,6 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: test-${{ matrix.texlive_version }}
+          name: test-${{ matrix.os }}-${{ matrix.texlive_version }}
           path: test
         if: always()
