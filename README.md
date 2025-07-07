@@ -6,7 +6,7 @@ A GitHub Action that compiles LaTeX documents to PDF using a complete TeXLive en
 
 ## Features
 
-- 🐳 **Containerized**: Run in a Docker container with a full [TeXLive](https://www.tug.org/texlive/) installation.
+- 🐳 **Containerized**: Run in a [Docker container](https://github.com/xu-cheng/latex-docker/) with a full [TeXLive](https://www.tug.org/texlive/) installation.
 - 📅 **TeXLive Version flexibility**: Support both the latest and historic versions of TeXLive.
 - 🐧 **Multi-platform**: Support both Alpine and Debian-based Docker images.
 - 📁 **Multi-document support**: Compile multiple LaTeX files in a single workflow.
