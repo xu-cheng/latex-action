@@ -1,7 +1,6 @@
 name: test
 permissions:
   contents: read
-  actions: read
 on:
   push:
   pull_request:
