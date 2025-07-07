@@ -66,7 +66,6 @@ run docker run --rm \
   -e "INPUT_LATEXMK_SHELL_ESCAPE" \
   -e "INPUT_LATEXMK_USE_LUALATEX" \
   -e "INPUT_LATEXMK_USE_XELATEX" \
-  -e "INPUT_OS" \
   -e "INPUT_POST_COMPILE" \
   -e "INPUT_PRE_COMPILE" \
   -e "INPUT_ROOT_FILE" \
