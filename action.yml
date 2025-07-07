@@ -1,44 +1,47 @@
-name: Github Action for LaTeX
+name: GitHub Action for LaTeX
 description: GitHub Action to compile LaTeX documents
-author: Cheng XU
+author: Cheng Xu
 inputs:
   texlive_version:
-    description: The version of TeX Live to be used
+    description: "TeXLive version to use"
+  os:
+    description: "Base operating system for the TeXLive Docker image ('alpine' or 'debian')"
+    default: alpine
   docker_image:
-    description: The docker image to be used
+    description: "Custom Docker image to use"
   root_file:
-    description: The root LaTeX file to be compiled
+    description: "Root LaTeX file(s) to compile"
     required: true
   working_directory:
-    description: The working directory for this action
+    description: "Working directory for the compilation process"
   work_in_root_file_dir:
-    description: Change directory into each root file's directory before compiling each documents
+    description: "Change to each root file's directory before compilation"
     default: "false"
   continue_on_error:
-    description: Continuing to build document even with LaTeX build errors
+    description: "Continue building remaining documents even if some fail"
     default: "false"
   compiler:
-    description: The LaTeX engine to be invoked
+    description: "LaTeX compiler to use"
     default: latexmk
   args:
-    description: Extra arguments to be passed to the LaTeX engine
+    description: "Additional arguments passed to the LaTeX compiler"
     default: "-pdf -file-line-error -halt-on-error -interaction=nonstopmode"
   extra_system_packages:
-    description: Install extra packages by apk
+    description: "Additional system packages to install"
   extra_fonts:
-    description: Install extra .ttf/.otf fonts.
+    description: "Extra font files to install"
   pre_compile:
-    description: Arbitrary bash codes to be executed before compiling LaTeX documents
+    description: "Bash commands to execute before compilation"
   post_compile:
-    description: Arbitrary bash codes to be executed after compiling LaTeX documents
+    description: "Bash commands to execute after compilation"
   latexmk_shell_escape:
-    description: Instruct latexmk to enable --shell-escape
+    description: "Enable shell-escape for latexmk"
     default: "false"
   latexmk_use_lualatex:
-    description: Instruct latexmk to use LuaLaTeX
+    description: "Use LuaLaTeX engine with latexmk"
     default: "false"
   latexmk_use_xelatex:
-    description: Instruct latexmk to use XeLaTeX
+    description: "Use XeLaTeX engine with latexmk"
     default: "false"
 
 runs:
@@ -49,6 +52,7 @@ runs:
         "${GITHUB_ACTION_PATH}/action.sh"
       env:
         INPUT_TEXLIVE_VERSION: ${{ inputs.texlive_version }}
+        INPUT_OS: ${{ inputs.os }}
         INPUT_DOCKER_IMAGE: ${{ inputs.docker_image }}
         INPUT_ROOT_FILE: ${{ inputs.root_file }}
         INPUT_WORKING_DIRECTORY: ${{ inputs.working_directory }}

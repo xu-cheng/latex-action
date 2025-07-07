@@ -16,10 +16,6 @@ error() {
   exit 1
 }
 
-# install git on old images
-if ! command -v git &>/dev/null; then
-  apk --no-cache add git
-fi
 git config --system --add safe.directory "$GITHUB_WORKSPACE"
 
 if [[ -z "$INPUT_ROOT_FILE" ]]; then
@@ -95,10 +91,21 @@ else
 fi
 
 if [[ -n "$INPUT_EXTRA_SYSTEM_PACKAGES" ]]; then
+  if command -v apt-get &>/dev/null; then
+    info "Update apt index"
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update -y
+  fi
+
   IFS=$' \t\n'
   for pkg in $INPUT_EXTRA_SYSTEM_PACKAGES; do
-    info "Install $pkg by apk"
-    apk --no-cache add "$pkg"
+    if command -v apt-get &>/dev/null; then
+      info "Install $pkg by apt-get"
+      apt-get install -y --no-install-suggests "$pkg"
+    else
+      info "Install $pkg by apk"
+      apk --no-cache add "$pkg"
+    fi
   done
 fi
 
@@ -124,12 +131,6 @@ if [[ -n "$INPUT_EXTRA_FONTS" ]]; then
   done
 
   fc-cache -fv
-fi
-
-if [[ -n "$INPUT_TLMGR_REPO" && "$INPUT_TLMGR_REPO" != latest ]]; then
-  tlmgr_repo_url="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$INPUT_TLMGR_REPO/tlnet-final"
-  info "Set tlmgr repo to $tlmgr_repo_url"
-  tlmgr option repository "$tlmgr_repo_url"
 fi
 
 if [[ -n "$INPUT_PRE_COMPILE" ]]; then
