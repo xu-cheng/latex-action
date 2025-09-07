@@ -54,7 +54,7 @@ runs:
         INPUT_TEXLIVE_VERSION: ${{ inputs.texlive_version }}
         INPUT_OS: ${{ inputs.os }}
         INPUT_DOCKER_IMAGE: ${{ inputs.docker_image }}
-        INPUT_ROOT_FILE: ${{ inputs.root_file }}
+        INPUT_ROOT_FILE: "${{ inputs.root_file }}"
         INPUT_WORKING_DIRECTORY: ${{ inputs.working_directory }}
         INPUT_WORK_IN_ROOT_FILE_DIR: ${{ inputs.work_in_root_file_dir }}
         INPUT_CONTINUE_ON_ERROR: ${{ inputs.continue_on_error }}
