@@ -142,13 +142,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
           root_file: main.tex
       - name: Upload PDF file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: PDF
           path: main.pdf
@@ -174,7 +174,7 @@ By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, y
     latexmk_use_lualatex: true
 ```
 
-Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
+Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](https://texdoc.org/serve/latexmk/0) for more information.
 
 ### How to enable `--shell-escape`?
 
@@ -194,7 +194,7 @@ The compiled PDF file will be placed in the same directory as the LaTeX source f
 - **Upload as artifact** - Use [`@actions/upload-artifact`](https://github.com/actions/upload-artifact) to make the PDF available in the workflow tab:
 
   ```yaml
-  - uses: actions/upload-artifact@v4
+  - uses: actions/upload-artifact@v5
     with:
       name: PDF
       path: main.pdf

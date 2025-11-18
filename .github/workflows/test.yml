@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Compile basic LaTeX document
         uses: ./
         with:
@@ -161,7 +161,7 @@ jobs:
           file test/abc.pdf | grep -q ' PDF '
           file test/not_error.pdf | grep -q ' PDF '
       - name: Upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: test-${{ matrix.os }}-${{ matrix.texlive_version }}
           path: test
