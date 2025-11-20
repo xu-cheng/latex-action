@@ -142,7 +142,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
