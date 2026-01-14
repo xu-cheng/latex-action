@@ -38,7 +38,7 @@ Configure the action by providing these inputs in the `with` section:
 ### Environment Configuration
 
 - **`texlive_version`**
-  TeXLive version to use (2020-2025 or 'latest'). Defaults to latest. Cannot be used with `docker_image`.
+  TeXLive version to use (`2020` to `2025` or `latest`). Defaults to `latest`. Cannot be used with `docker_image`.
 
   ```yaml
   - uses: xu-cheng/latex-action@v4
@@ -73,10 +73,10 @@ Configure the action by providing these inputs in the `with` section:
   Working directory for the compilation process.
 
 - **`work_in_root_file_dir`**
-  Change to each root file's directory before compilation. Useful for multi-document builds where each document has its own directory structure.
+  Change to each root file's directory before compilation. Useful for multi-document builds where each document has its own directory structure. Defaults to `false`.
 
 - **`continue_on_error`**
-  Continue building remaining documents even if some fail. The action will still report failure if any document fails.
+  Continue building remaining documents even if some fail. The action will still report failure if any document fails. Defaults to `false`.
 
 - **`compiler`**
   LaTeX compiler to use. Defaults to [`latexmk`](https://ctan.org/pkg/latexmk) for automated compilation.
@@ -124,13 +124,13 @@ Configure the action by providing these inputs in the `with` section:
 > The following inputs only work with the default `latexmk` compiler.
 
 - **`latexmk_shell_escape`**
-  Enable shell-escape for latexmk (allows external command execution).
+  Enable shell-escape for latexmk (allows external command execution). Defaults to `false`.
 
 - **`latexmk_use_lualatex`**
-  Use LuaLaTeX engine with latexmk.
+  Use LuaLaTeX engine with latexmk. Defaults to `false`.
 
 - **`latexmk_use_xelatex`**
-  Use XeLaTeX engine with latexmk.
+  Use XeLaTeX engine with latexmk. Defaults to `false`.
 
 ## Example
 
@@ -148,7 +148,7 @@ jobs:
         with:
           root_file: main.tex
       - name: Upload PDF file
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: PDF
           path: main.pdf
