@@ -161,7 +161,7 @@ jobs:
           file test/abc.pdf | grep -q ' PDF '
           file test/not_error.pdf | grep -q ' PDF '
       - name: Upload
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: test-${{ matrix.os }}-${{ matrix.texlive_version }}
           path: test
