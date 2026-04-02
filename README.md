@@ -38,7 +38,7 @@ Configure the action by providing these inputs in the `with` section:
 ### Environment Configuration
 
 - **`texlive_version`**
-  TeXLive version to use (`2020` to `2025` or `latest`). Defaults to `latest`. Cannot be used with `docker_image`.
+  TeXLive version to use (`2020` to `2026` or `latest`). Defaults to `latest`. Cannot be used with `docker_image`.
 
   ```yaml
   - uses: xu-cheng/latex-action@v4
