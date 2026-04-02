@@ -194,7 +194,7 @@ The compiled PDF file will be placed in the same directory as the LaTeX source f
 - **Upload as artifact** - Use [`@actions/upload-artifact`](https://github.com/actions/upload-artifact) to make the PDF available in the workflow tab:
 
   ```yaml
-  - uses: actions/upload-artifact@v5
+  - uses: actions/upload-artifact@v7
     with:
       name: PDF
       path: main.pdf
